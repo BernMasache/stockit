@@ -49,7 +49,7 @@ export default function Collections(props) {
                                 {props?.collections?.map((collection) => (
                                     <tr key={collection?.id} className="even:bg-gray-50">
                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
-                                            {collection?.dateCollected}
+                                            {collection?.dateCollected && JSON.parse(collection?.dateCollected)}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.collection}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.createdAt}</td>

@@ -106,9 +106,7 @@ class CollectionComponent extends React.Component {
                                                         // console.log(formData)
                                                         var data = Object.assign({}, formData)
                                                         data.user = data.collector
-                                                        // data.createdAt = new Date().getDate + "-" + new Date().getMonth + "-" + new Date().getFullYear
-                                                        // data.lastUpdated = new Date().getDate + "-" + new Date().getMonth + "-" + new Date().getFullYear
-
+                                                        data.dateCollected = JSON.stringify(data.dateCollected)
                                                         this.handleOkay(data)
                                                         resetForm({ values: '' });
                                                         this.setState({ open: false })
