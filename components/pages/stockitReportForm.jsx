@@ -99,13 +99,14 @@ class CollectionComponent extends React.Component {
                                                     initialValues={{
                                                         collection: "",
                                                         dateCollected: "",
-                                                        collector: ""
+                                                        shareShop: "",
+                                                        numberOfDays: "",
+                                                        rentalFare: ""
                                                     }}
                                                     validationSchema={CollectionSchema()}
                                                     onSubmit={(formData, { resetForm }) => {
                                                         // console.log(formData)
                                                         var data = Object.assign({}, formData)
-                                                        data.user = data.collector
                                                         data.dateCollected = JSON.stringify(data.dateCollected)
                                                         this.handleOkay(data)
                                                         resetForm({ values: '' });
@@ -124,7 +125,7 @@ class CollectionComponent extends React.Component {
 
                                                                                 type="date"
                                                                                 name="dateCollected"
-                                                                                className={`mt-2  p-2 bg-gray-100 text-gray-600
+                                                                                className={`mt-2  p-2 bg-gray-100 text-gray-600 mb-2
                                                                        block
                                                                         w-full
                                                                         shadow-sm
@@ -137,6 +138,7 @@ class CollectionComponent extends React.Component {
                                                                                 name="dateCollected"
                                                                                 className="invalid-feedback" />
                                                                         </div>
+
                                                                         <div className="">
                                                                             <div className="col-span-6 sm:col-span-3">
                                                                                 <label
@@ -144,7 +146,7 @@ class CollectionComponent extends React.Component {
                                                                                 <Field
                                                                                     type="number"
                                                                                     name="collection"
-                                                                                    className={`mt-2  p-2 bg-gray-100
+                                                                                    className={`mt-2  p-2 bg-gray-100 mb-2
                                                                                     text-gray-600
                                                                         block
                                                                         w-full
@@ -161,26 +163,78 @@ class CollectionComponent extends React.Component {
 
                                                                         </div>
 
-                                                                        <div >
-                                                                            <label
-                                                                                className="block text-sm font-medium text-gray-700 capitalize" htmlFor="collector">collected by</label>
-                                                                            <Field
-
-                                                                                type="text"
-                                                                                name="collector"
-                                                                                className={`mt-2  p-2 bg-gray-100 text-gray-600
-                                                                       block
+                                                                        <div className="">
+                                                                            <div className="col-span-6 sm:col-span-3">
+                                                                                <label
+                                                                                    className="block text-sm font-medium text-gray-700 capitalize" htmlFor="numberOfDays">Number of days</label>
+                                                                                <Field
+                                                                                    type="number"
+                                                                                    name="numberOfDays"
+                                                                                    className={`mt-2  p-2 bg-gray-100 mb-2
+                                                                                    text-gray-600
+                                                                        block
                                                                         w-full
                                                                         shadow-sm
                                                                         sm:text-sm
                                                                         border-gray-300
                                                                         rounded-md
-                                                                        ${touched.collector && errors.collector ? "is-invalid  focus:ring-red-500 focus:border-red-500 " : "focus:ring-green-500 focus:border-gray-500"}`} />
+                                                                        ${touched.numberOfDays && errors.numberOfDays ? "is-invalid  focus:ring-red-500 focus:border-red-500 " : "focus:ring-green-500 focus:border-gray-500"}`} />
+                                                                                <ErrorMessage
+                                                                                    component="span"
+                                                                                    name="numberOfDays"
+                                                                                    className="invalid-feedback" />
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div >
+                                                                            <label
+                                                                                className="block text-sm font-medium text-gray-700 capitalize" htmlFor="rentalFare">Rent per day</label>
+                                                                            <Field as="select" type="number" name="rentalFare" className={` mt-2 mb-2  p-2 bg-gray-100
+                                                                                    block
+                                                                                    shadow-sm
+                                                                                    w-full
+                                                                                    sm:text-sm
+                                                                                    border-gray-300
+                                                                                    rounded-md
+                                                                                    ${touched.rentalFare && errors.rentalFare ? "is-invalid  focus:ring-red-500 focus:border-red-500 " : "focus:ring-orange-500 focus:border-orange-500"}`}>
+                                                                                <option></option>
+                                                                                {this.props.collectionsConfiguration.map((collection, i) => {
+                                                                                    return <option value={collection.rent} key={i} >{collection.rent}</option>;
+                                                                                })}
+
+
+                                                                            </Field>
                                                                             <ErrorMessage
                                                                                 component="span"
-                                                                                name="collector"
-                                                                                className="invalid-feedback" />
+                                                                                name="rentalFare"
+                                                                                className="invalid-feedback"
+                                                                            />
                                                                         </div>
+                                                                        <div className="">
+                                                                            <div className="col-span-6 sm:col-span-3">
+                                                                                <label
+                                                                                    className="block text-sm font-medium text-gray-700 capitalize" htmlFor="shareShop">Shop share</label>
+                                                                                <Field
+                                                                                    type="number"
+                                                                                    name="shareShop"
+                                                                                    className={`mt-2  p-2 bg-gray-100 mb-2
+                                                                                    text-gray-600
+                                                                        block
+                                                                        w-full
+                                                                        shadow-sm
+                                                                        sm:text-sm
+                                                                        border-gray-300
+                                                                        rounded-md
+                                                                        ${touched.shareShop && errors.shareShop ? "is-invalid  focus:ring-red-500 focus:border-red-500 " : "focus:ring-green-500 focus:border-gray-500"}`} />
+                                                                                <ErrorMessage
+                                                                                    component="span"
+                                                                                    name="collection"
+                                                                                    className="invalid-feedback" />
+                                                                            </div>
+
+                                                                        </div>
+
                                                                     </div>
 
                                                                 </div>

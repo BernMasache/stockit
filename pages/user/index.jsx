@@ -3,25 +3,21 @@ import { withRouter } from "next/router";
 import UserLayout from "../../components/layout/user.layout";
 import Collections from "../../components/pages/collections";
 import UseCollectionStore from "../../services/store/collection.store";
+import UseDataCalculation from "../../services/utilities/formula";
 // import Cookies from "js-cookie";
 
 //PAGE
 
 // Store
 const useCollectionStore = new UseCollectionStore()
-
+const useFormula = new UseDataCalculation()
 class Page extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             loading: false,
             collections: [],
-            breadcrumbPages: [
-                {
-                    href: "/",
-                    name: "Home",
-                },
-            ],
+            collectionsConfiguration: []
         };
     }
 
@@ -30,15 +26,27 @@ class Page extends React.Component {
     }
     getCollections = () => {
         useCollectionStore.getCollections().then(collections => {
-            // console.log(collections);
+
             this.setState({
                 collections: collections.data
             })
         })
     }
-    create = (data) => {
-        useCollectionStore.create(data).then(response => {
+    getCollections = () => {
+        useCollectionStore.getCollectionConfigurations().then(collectionsConfiguration => {
 
+            this.setState({
+                collectionsConfiguration: collectionsConfiguration.data
+            })
+        })
+    }
+
+    create = (data) => {
+        let rentalFare = useFormula.totalRent(data.rentalFare, data.numberOfDays)
+        let shopShare = useFormula.share(data.collection, data.shareShop, rentalFare)
+        data.shareGryton = shopShare
+        data.rent = rentalFare
+        useCollectionStore.crentalFarereate(data).then(response => {
             this.getCollections()
         })
     }
@@ -67,7 +75,7 @@ class Page extends React.Component {
                     </div>
                 </div>
 
-                <Collections collections={this.state.collections} create={this.create} />
+                <Collections collections={this.state.collections} create={this.create} collectionsConfiguration={this.state.collectionsConfiguration} />
             </div>
         );
     }

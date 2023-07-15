@@ -20,7 +20,7 @@ export default function Collections(props) {
                     </p>
                 </div>
                 <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <CollectionComponent create={props.create} />
+                    <CollectionComponent create={props.create} collectionsConfiguration={props.collectionsConfiguration} />
                 </div>
             </div>
             <div className="mt-8 flow-root">
