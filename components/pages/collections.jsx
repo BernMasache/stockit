@@ -28,11 +28,14 @@ export default function Collections(props) {
                                         Amount
                                     </th>
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Created
+                                        Rent
                                     </th>
 
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        User
+                                        Shop Share
+                                    </th>
+                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Gryton Share
                                     </th>
 
                                 </tr>
@@ -43,9 +46,10 @@ export default function Collections(props) {
                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-3">
                                             {collection?.dateCollected && JSON.parse(collection?.dateCollected)}
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.collection}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.createdAt}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.user}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.collection}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.rent}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareShop}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareGryton}</td>
 
                                     </tr>
                                 ))}
