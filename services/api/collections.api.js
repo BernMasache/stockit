@@ -1,20 +1,27 @@
 import HttpRequest from "../utilities/httpRequest"
 const url = "https://sheetdb.io/api/v1/wlmuwtzjdg404"
 const collectionsUrl = "https://sheetdb.io/api/v1/wlmuwtzjdg404"
-
+const TOKEN = process.env.NEXT_PUBLIC_TOKEN
 const httpRequest = new HttpRequest()
-const headers = new Headers({
+const headers = {
     'Accept': 'application/json',
-    'Content-Type': 'application/json'
-},)
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${TOKEN}`
+}
+
 export default class UseCollectionService {
+
     getCollectionsConfigurations = async () => {
-        const configurations = await httpRequest.get(url + "?sheet=configurations")
+        const configurations = await httpRequest.get(url + "?sheet=configurations", {
+            headers
+        })
         return configurations
     }
 
     getCollections = async () => {
-        const collections = await httpRequest.get(url + "?sheet=collections")
+        const collections = await httpRequest.get(url + "?sheet=collections", {
+            headers
+        })
         return collections
     }
 
@@ -28,10 +35,7 @@ export default class UseCollectionService {
                 body
             ]
         }), {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+            headers
         })
         return result
     }

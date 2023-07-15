@@ -2,8 +2,8 @@ import axios from "axios"
 
 export default class HttpRequest {
 
-    get = async (url) => {
-        const response = await axios.get(url)
+    get = async (url, header) => {
+        const response = await axios.get(url, header)
         return response
     }
     getByParam = async (url, param) => {
