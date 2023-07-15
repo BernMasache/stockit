@@ -1,12 +1,4 @@
 import CollectionComponent from "../../components/pages/stockitReportForm"
-const people = [
-    { name: '10-05-2023', title: 2100, email: 900, role: 'Within range' },
-    { name: '11-05-2023', title: 2800, email: 200, role: 'good' },
-
-    { name: '12-05-2023', title: 3000, email: 0, role: 'good' },
-
-    // More people...
-]
 
 export default function Collections(props) {
 

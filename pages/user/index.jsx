@@ -23,16 +23,16 @@ class Page extends React.Component {
 
     componentDidMount() {
         this.getCollections()
+        this.getCollectionConfigurations()
     }
     getCollections = () => {
         useCollectionStore.getCollections().then(collections => {
-
             this.setState({
                 collections: collections.data
             })
         })
     }
-    getCollections = () => {
+    getCollectionConfigurations = () => {
         useCollectionStore.getCollectionConfigurations().then(collectionsConfiguration => {
 
             this.setState({
