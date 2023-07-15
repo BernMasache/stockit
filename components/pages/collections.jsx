@@ -38,12 +38,11 @@ export default function Collections(props) {
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Created
                                     </th>
+
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         User
                                     </th>
-                                    <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-3">
-                                        <span className="sr-only">Edit</span>
-                                    </th>
+
                                 </tr>
                             </thead>
                             <tbody className="bg-white">
@@ -55,11 +54,7 @@ export default function Collections(props) {
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.collection}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.createdAt}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.user}</td>
-                                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                                            <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                                                Edit
-                                            </a>
-                                        </td>
+
                                     </tr>
                                 ))}
                             </tbody>
