@@ -10,7 +10,7 @@ const headers = {
     'Authorization': `Bearer ${TOKEN}`
 }
 
-export default class UseCollectionService {
+export default class UseUserService {
     login = async (data) => {
         const user = await httpRequest.get(url + `{${data.username}&${data.password}}`, { headers })
         return user
