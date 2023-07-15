@@ -28,9 +28,11 @@ export default function Collections(props) {
                                         Amount
                                     </th>
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        No. of Days
+                                    </th>
+                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Rent
                                     </th>
-
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Shop Share
                                     </th>
@@ -47,6 +49,8 @@ export default function Collections(props) {
                                             {collection?.dateCollected && JSON.parse(collection?.dateCollected)}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.collection}</td>
+                        
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.numberOfDays}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.rent}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareShop}</td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareGryton}</td>
