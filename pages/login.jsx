@@ -1,4 +1,32 @@
+import { useState } from "react"
+import UseUserStore from "../services/store/user.store"
+
+const useUser = new UseUserStore()
 export default function LoginPage() {
+
+  const [userData, setUserData] = useState({
+    username: "",
+    password: ""
+  })
+  const loginDetails = (e) => {
+
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const loginUser = (e) => {
+    e.preventDefault()
+    if (userData.username == undefined || userData.username == "" || userData.password == undefined || userData.password == "") {
+
+    } else {
+      useUser.login(userData).then(response => {
+        console.log(response);
+      })
+    }
+  }
+
   return (
     <>
       <div className="flex min-h-full flex-1 items-center justify-center px-4 py-12 sm:px-6 lg:px-8 bg-gray-50 h-[100vh]">
@@ -13,7 +41,7 @@ export default function LoginPage() {
               Sign in to Stockit
             </h2>
           </div>
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={loginUser}>
             <div className="relative -space-y-px rounded-md shadow-sm">
               <div className="pointer-events-none absolute inset-0 z-10 rounded-md ring-1 ring-inset ring-gray-300" />
               <div>
@@ -21,10 +49,12 @@ export default function LoginPage() {
                   Unername
                 </label>
                 <input
+                  onChange={loginDetails}
                   id="username"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
+                  name="username"
+                  type="text"
+                  autoComplete="username"
+
                   required
                   className="relative p-2 block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="username"
@@ -35,6 +65,7 @@ export default function LoginPage() {
                   Password
                 </label>
                 <input
+                  onChange={loginDetails}
                   id="password"
                   name="password"
                   type="password"
