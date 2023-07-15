@@ -117,7 +117,7 @@ class CollectionComponent extends React.Component {
                                                     {({ touched, errors, isSubmitting, values }) => {
                                                         return <>
                                                             <Form>
-                                                                <div className='space-y-4 '  >
+                                                                <div className='space-y-4'  >
                                                                     <div>
                                                                         <div >
                                                                             <label
