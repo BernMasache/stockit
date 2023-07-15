@@ -46,7 +46,7 @@ class Page extends React.Component {
         let shopShare = useFormula.share(data.collection, data.shareShop, rentalFare)
         data.shareGryton = shopShare
         data.rent = rentalFare
-        useCollectionStore.crentalFarereate(data).then(response => {
+        useCollectionStore.create(data).then(response => {
             this.getCollections()
         })
     }
