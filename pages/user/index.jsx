@@ -4,6 +4,7 @@ import UserLayout from "../../components/layout/user.layout";
 import Collections from "../../components/pages/collections";
 import UseCollectionStore from "../../services/store/collection.store";
 import UseDataCalculation from "../../services/utilities/formula";
+import CollectionsByMonthYear from "../../components/pages/collectionsByMonthYear";
 // import Cookies from "js-cookie";
 
 //PAGE
@@ -75,7 +76,7 @@ class Page extends React.Component {
                         </button>
                     </div>
                 </div>
-
+                {/* <CollectionsByMonthYear /> */}
                 <Collections collections={this.state.collections} create={this.create} collectionsConfiguration={this.state.collectionsConfiguration} />
             </div>
         );
