@@ -5,10 +5,15 @@ import Collections from "../../components/pages/collections";
 import UseCollectionStore from "../../services/store/collection.store";
 import UseDataCalculation from "../../services/utilities/formula";
 import CollectionsByMonthYear from "../../components/pages/collectionsByMonthYear";
-// import Cookies from "js-cookie";
-
-//PAGE
-
+import {
+    ToastContainer,
+    toast,
+    Slide,
+    Zoom,
+    Flip,
+    Bounce,
+} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // Store
 const useCollectionStore = new UseCollectionStore()
 const useFormula = new UseDataCalculation()
@@ -49,12 +54,91 @@ class Page extends React.Component {
         data.rent = rentalFare
         data.rentPerDay = data.rentalFare
         useCollectionStore.create(data).then(response => {
+
+            if (response.status == 201) {
+                toast.success("Successfully created new collection", {
+                    position: "top-right",
+                    transition: Flip,
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+
+            } else {
+                toast.error("Error occurred", {
+                    position: "top-right",
+                    transition: Flip,
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            }
+        }).catch(e => {
+            toast.error("Error occurred", {
+                position: "top-right",
+                transition: Flip,
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }).finally(() => {
             this.getCollections()
         })
     }
     delete = (id) => {
         useCollectionStore.delete(id).then(res => {
-            console.log(res);
+            if (res.status == 200) {
+                toast.success("Successfully deleted the collection No. " + id, {
+                    position: "top-right",
+                    transition: Flip,
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+
+            } else {
+                toast.error("Error occurred", {
+                    position: "top-right",
+                    transition: Flip,
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            }
+        }).catch(e => {
+            toast.error("Error occurred", {
+                position: "top-right",
+                transition: Flip,
+                autoClose: 2000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }).finally(() => {
+            this.getCollections()
         })
     }
     render() {
@@ -83,6 +167,7 @@ class Page extends React.Component {
                 </div>
                 {/* <CollectionsByMonthYear /> */}
                 <Collections collections={this.state.collections} create={this.create} delete={this.delete} collectionsConfiguration={this.state.collectionsConfiguration} />
+                <ToastContainer transition={Flip} />
             </div>
         );
     }
