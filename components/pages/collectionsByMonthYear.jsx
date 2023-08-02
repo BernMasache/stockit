@@ -76,16 +76,17 @@ export default function CollectionsByMonthYear(props) {
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.rent}</td>
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareShop}</td>
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareGryton}</td>
-                                                                        <td>
-                                                                            <DeleteCollection collectionId={collection?.id} delete={deleteCollection} />
-                                                                        </td>
+
                                                                         <td>
                                                                             <button
                                                                                 type="button"
-                                                                                className="rounded bg-orange-700 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+                                                                                className="rounded bg-gray-500 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
                                                                             >
                                                                                 Edit
                                                                             </button>
+                                                                        </td>
+                                                                        <td>
+                                                                            <DeleteCollection collectionId={collection?.id} delete={deleteCollection} />
                                                                         </td>
                                                                     </>
                                                                         : ""
