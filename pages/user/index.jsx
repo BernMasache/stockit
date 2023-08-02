@@ -52,6 +52,11 @@ class Page extends React.Component {
             this.getCollections()
         })
     }
+    delete = (id) => {
+        useCollectionStore.delete(id).then(res => {
+            console.log(res);
+        })
+    }
     render() {
         return (
             <div>
@@ -77,7 +82,7 @@ class Page extends React.Component {
                     </div>
                 </div>
                 {/* <CollectionsByMonthYear /> */}
-                <Collections collections={this.state.collections} create={this.create} collectionsConfiguration={this.state.collectionsConfiguration} />
+                <Collections collections={this.state.collections} create={this.create} delete={this.delete} collectionsConfiguration={this.state.collectionsConfiguration} />
             </div>
         );
     }

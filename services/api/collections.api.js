@@ -38,4 +38,11 @@ export default class UseCollectionService {
         })
         return result
     }
+
+    deleteCollection = async (id) => {
+        const result = await httpRequest.delete(URL, id + "?sheet=collections", {
+            headers
+        })
+        return result
+    }
 }

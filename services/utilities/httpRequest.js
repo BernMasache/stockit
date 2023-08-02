@@ -19,8 +19,8 @@ export default class HttpRequest {
         return response
     }
 
-    delete = async (url, param) => {
-        const response = await axios.get(url + "/" + param)
+    delete = async (url, param, header) => {
+        const response = await axios.delete(url + "/id/" + param, header)
         return response
     }
 }

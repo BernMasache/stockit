@@ -18,3 +18,12 @@ export function CollectionSchema() {
     }))
 }
 
+export function RemoveCollectionSchema() {
+    return (() => yup.object().shape({
+        code: yup.string().required(),
+        confirmCode: yup
+            .string()
+            .required("confirmation code is required")
+            .oneOf([yup.ref("code")], "confirmation code mismatch"),
+    }))
+}

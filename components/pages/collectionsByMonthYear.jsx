@@ -1,7 +1,12 @@
 import { Disclosure } from '@headlessui/react'
-import { MinusSmallIcon, PlusSmallIcon,ChevronUpIcon,ChevronDownIcon } from '@heroicons/react/24/outline'
+import { MinusSmallIcon, PlusSmallIcon, ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
+import DeleteCollection from './forms/delete'
 
 export default function CollectionsByMonthYear(props) {
+
+    const deleteCollection = (id) => {
+        props?.delete(id)
+    }
     return (
         <div className="bg-white">
             <div className="mx-auto max-w-7xl px-6 sm:py-1 lg:px-8 lg:py-1">
@@ -16,7 +21,7 @@ export default function CollectionsByMonthYear(props) {
                                         <dt>
                                             <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
                                                 <span className="text-base font-semibold leading-7">{[{ key: "01", month: "January" }, { key: "02", month: "February" }, { key: "03", month: "March" }, { key: "04", month: "April" }, { key: "05", month: "May" }, { key: "06", month: "June" }, { key: "07", month: "July" }, { key: "08", month: "August" }, { key: "09", month: "September" }, { key: "10", month: "October" }, { key: "11", month: "November" }, { key: "12", month: "December" }].map((dayMonth, k) => {
-                                                    return dayMonth?.key == date.split("-")[1] ? <div className="">{dayMonth?.month}, {date?.split("-")[0]}</div> : ""
+                                                    return dayMonth?.key == date.split("-")[1] ? <div key={k} className="">{dayMonth?.month}, {date?.split("-")[0]}</div> : ""
                                                 })}</span>
                                                 <span className="ml-6 flex h-7 items-center">
                                                     {open ? (
@@ -67,25 +72,19 @@ export default function CollectionsByMonthYear(props) {
                                                                         </td>
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.collection}</td>
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.rentPerDay}</td>
-
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.numberOfDays}</td>
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.rent}</td>
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareShop}</td>
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareGryton}</td>
                                                                         <td>
-                                                                            <button
-                                                                                type="button"
-                                                                                className="rounded bg-orange-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
-                                                                            >
-                                                                                Edit
-                                                                            </button>
+                                                                            <DeleteCollection collectionId={collection?.id} delete={deleteCollection} />
                                                                         </td>
                                                                         <td>
                                                                             <button
                                                                                 type="button"
-                                                                                className="rounded bg-red-700 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                                                                                className="rounded bg-orange-700 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
                                                                             >
-                                                                                Delete
+                                                                                Edit
                                                                             </button>
                                                                         </td>
                                                                     </>
