@@ -15,6 +15,10 @@ export default class UseCollectionStore {
         const response = await useCollectionService.createCollection(data)
         return response
     }
+    update = async (data) => {
+        const response = await useCollectionService.updateCollection(data)
+        return response
+    }
     delete = async (id) => {
         const response = await useCollectionService.deleteCollection(id)
         return response

@@ -49,7 +49,7 @@ class Page extends React.Component {
 
     create = (data) => {
         let rentalFare = useFormula.totalRent(data.rentalFare, data.numberOfDays)
-        let shopShare = useFormula.share(data.collection, data.shareShop, rentalFare)
+        let shopShare = useFormula.share(data.collection, data.shareShop, rentalFare, data.other)
         data.shareGryton = shopShare
         data.rent = rentalFare
         data.rentPerDay = data.rentalFare

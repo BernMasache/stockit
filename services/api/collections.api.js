@@ -38,6 +38,19 @@ export default class UseCollectionService {
         })
         return result
     }
+    
+    updateCollection = async (body) => {
+        body.lastUpdated = "DATETIME"
+
+        const result = await httpRequest.create(URL + "?sheet=collections", JSON.stringify({
+            body: JSON.stringify({
+                data: body
+            })
+        }), {
+            headers
+        })
+        return result
+    }
 
     deleteCollection = async (id) => {
         const result = await httpRequest.delete(URL, id + "?sheet=collections", {

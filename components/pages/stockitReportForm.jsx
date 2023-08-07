@@ -97,11 +97,13 @@ class CollectionComponent extends React.Component {
                                             <div >
                                                 <Formik
                                                     initialValues={{
-                                                        collection: "",
+                                                        collection: 0,
                                                         dateCollected: "",
-                                                        shareShop: "",
-                                                        numberOfDays: "",
-                                                        rentalFare: ""
+                                                        shareShop: 0,
+                                                        numberOfDays: 0,
+                                                        rentalFare: 0,
+                                                        other: 0,
+                                                        comment: ""
                                                     }}
                                                     validationSchema={CollectionSchema()}
                                                     onSubmit={(formData, { resetForm }) => {
@@ -230,6 +232,58 @@ class CollectionComponent extends React.Component {
                                                                                 <ErrorMessage
                                                                                     component="span"
                                                                                     name="collection"
+                                                                                    className="invalid-feedback" />
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div className="">
+                                                                            <div className="col-span-6 sm:col-span-3">
+                                                                                <label
+                                                                                    className="block text-sm font-medium text-gray-700 capitalize" htmlFor="other">Other</label>
+                                                                                <Field
+                                                                                    type="number"
+                                                                                    name="other"
+                                                                                    className={`mt-2  p-2 bg-gray-100 mb-2
+                                                                                    text-gray-600
+                                                                        block
+                                                                        w-full
+                                                                        shadow-sm
+                                                                        sm:text-sm
+                                                                        border-gray-300
+                                                                        rounded-md
+                                                                        ${touched.other && errors.other ? "is-invalid  focus:ring-red-500 focus:border-red-500 " : "focus:ring-green-500 focus:border-gray-500"}`} />
+                                                                                <ErrorMessage
+                                                                                    component="span"
+                                                                                    name="other"
+                                                                                    className="invalid-feedback" />
+                                                                            </div>
+
+                                                                        </div>
+
+
+                                                                        <div className="">
+                                                                            <div className="col-span-6 sm:col-span-3">
+                                                                                <label
+                                                                                    className="block text-sm font-medium text-gray-700 capitalize" htmlFor="comment">Comment</label>
+                                                                                <Field
+                                                                                    type="text"
+                                                                                    as="textarea"
+                                                                                    rows={2}
+                                                                                    name="comment"
+                                                                                    placeholder="Comment if other has a value"
+                                                                                    className={`mt-2  p-2 bg-gray-100 mb-2
+                                                                                    text-gray-600
+                                                                        block
+                                                                        w-full
+                                                                        shadow-sm
+                                                                        sm:text-sm
+                                                                        border-gray-300
+                                                                        rounded-md
+                                                                        ${touched.comment && errors.comment ? "is-invalid  focus:ring-red-500 focus:border-red-500 " : "focus:ring-green-500 focus:border-gray-500"}`} />
+                                                                                <ErrorMessage
+                                                                                    component="span"
+                                                                                    name="comment"
                                                                                     className="invalid-feedback" />
                                                                             </div>
 

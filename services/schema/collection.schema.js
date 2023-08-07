@@ -11,6 +11,10 @@ export function CollectionSchema() {
         shareShop: yup
             .number()
             .required("Share for the shop is required"),
+        others: yup
+            .number(),
+        comment: yup
+            .string(),
         rentalFare: yup
             .number()
             .required("Monthly rent is required"),
@@ -25,5 +29,18 @@ export function RemoveCollectionSchema() {
             .string()
             .required("confirmation code is required")
             .oneOf([yup.ref("code")], "confirmation code mismatch"),
+    }))
+}
+
+export function UpdateCollectionSchema() {
+    return (() => yup.object().shape({
+        id: yup.string().required("Required field"),
+        collection: yup.string().matches(/^[A-Za-z ]+$/, "Invalid input format").required("Required field"),
+        dateCollected: yup.string().matches(/^[A-Za-z ]+$/, "Invalid input format").required("Required field"),
+        rentalFare: yup.string().required("Required field"),
+        numberOfDays: yup.string().required("Required field"),
+        shareShop: yup.bool().default(false).required("Required field"),
+        others: yup.number(),
+        comment: yup.string(),
     }))
 }

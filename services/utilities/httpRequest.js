@@ -15,7 +15,7 @@ export default class HttpRequest {
         return response
     }
     update = async (url, body, header) => {
-        const response = await axios.patch(url, body, header)
+        const response = await axios.patch(url + "/id/" + body.id, body, header)
         return response
     }
 

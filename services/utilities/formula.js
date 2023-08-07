@@ -5,8 +5,8 @@ export default class UseDataCalculation {
         return total
     }
 
-    share = (amount, shared, rentTotal) => {
-        const shareGryton = amount - shared - rentTotal
+    share = (amount, shared, rentTotal, other) => {
+        const shareGryton = amount - shared - rentTotal - other
         return shareGryton
     }
 
