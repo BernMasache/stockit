@@ -57,6 +57,12 @@ export default function CollectionsByMonthYear(props) {
                                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                             Gryton Share
                                                         </th>
+                                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                            Others
+                                                        </th>
+                                                        <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                                            Description
+                                                        </th>
 
                                                     </tr>
                                                 </thead>
@@ -77,6 +83,8 @@ export default function CollectionsByMonthYear(props) {
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareShop}</td>
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareGryton}</td>
 
+                                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.other}</td>
+                                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.comment}</td>
                                                                         <td>
                                                                             <button
                                                                                 type="button"
