@@ -102,7 +102,7 @@ class CollectionComponent extends React.Component {
                                                         shareShop: 0,
                                                         numberOfDays: 0,
                                                         rentalFare: 0,
-                                                        other: 0,
+                                                        expenses: 0,
                                                         comment: ""
                                                     }}
                                                     validationSchema={CollectionSchema()}
@@ -240,10 +240,10 @@ class CollectionComponent extends React.Component {
                                                                         <div className="">
                                                                             <div className="col-span-6 sm:col-span-3">
                                                                                 <label
-                                                                                    className="block text-sm font-medium text-gray-700 capitalize" htmlFor="other">Other</label>
+                                                                                    className="block text-sm font-medium text-gray-700 capitalize" htmlFor="expenses">expenses</label>
                                                                                 <Field
                                                                                     type="number"
-                                                                                    name="other"
+                                                                                    name="expenses"
                                                                                     className={`mt-2  p-2 bg-gray-100 mb-2
                                                                                     text-gray-600
                                                                         block
@@ -252,10 +252,10 @@ class CollectionComponent extends React.Component {
                                                                         sm:text-sm
                                                                         border-gray-300
                                                                         rounded-md
-                                                                        ${touched.other && errors.other ? "is-invalid  focus:ring-red-500 focus:border-red-500 " : "focus:ring-green-500 focus:border-gray-500"}`} />
+                                                                        ${touched.expenses && errors.expenses ? "is-invalid  focus:ring-red-500 focus:border-red-500 " : "focus:ring-green-500 focus:border-gray-500"}`} />
                                                                                 <ErrorMessage
                                                                                     component="span"
-                                                                                    name="other"
+                                                                                    name="expenses"
                                                                                     className="invalid-feedback" />
                                                                             </div>
 
@@ -271,7 +271,7 @@ class CollectionComponent extends React.Component {
                                                                                     as="textarea"
                                                                                     rows={2}
                                                                                     name="comment"
-                                                                                    placeholder="Comment if other has a value"
+                                                                                    placeholder="Comment if expenses has a value"
                                                                                     className={`mt-2  p-2 bg-gray-100 mb-2
                                                                                     text-gray-600
                                                                         block

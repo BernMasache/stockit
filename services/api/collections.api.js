@@ -38,11 +38,11 @@ export default class UseCollectionService {
         })
         return result
     }
-    
+
     updateCollection = async (body) => {
         body.lastUpdated = "DATETIME"
 
-        const result = await httpRequest.create(URL + "?sheet=collections", JSON.stringify({
+        const result = await httpRequest.update(URL + "?sheet=collections", JSON.stringify({
             body: JSON.stringify({
                 data: body
             })

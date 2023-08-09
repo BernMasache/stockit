@@ -11,7 +11,7 @@ export function CollectionSchema() {
         shareShop: yup
             .number()
             .required("Share for the shop is required"),
-        others: yup
+        expenses: yup
             .number(),
         comment: yup
             .string(),
@@ -40,7 +40,7 @@ export function UpdateCollectionSchema() {
         rentalFare: yup.string().required("Required field"),
         numberOfDays: yup.string().required("Required field"),
         shareShop: yup.bool().default(false).required("Required field"),
-        others: yup.number(),
+        expenses: yup.number(),
         comment: yup.string(),
     }))
 }

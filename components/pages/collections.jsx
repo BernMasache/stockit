@@ -14,6 +14,9 @@ export default function Collections(props) {
     const deleteCollection = (id) => {
         props?.delete(id)
     }
+    const updateCollection = (data) => {
+        props?.update(data)
+    }
     return (
         <div className="p-3">
             <div className="sm:flex sm:items-center">
@@ -31,10 +34,7 @@ export default function Collections(props) {
                 props?.collections.length > 0 ? <div className="mt-8 flow-root">
                     <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8 h-[70vh]">
-
-
-                            <CollectionsByMonthYear delete={deleteCollection} collections={props?.collections} dates={uniqueMonthYear(props?.collections)} />
-
+                            <CollectionsByMonthYear delete={deleteCollection} collections={props?.collections} dates={uniqueMonthYear(props?.collections)} update={updateCollection} />
                         </div>
                     </div>
                 </div> : ""

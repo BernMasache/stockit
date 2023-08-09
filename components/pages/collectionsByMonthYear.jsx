@@ -1,12 +1,18 @@
 import { Disclosure } from '@headlessui/react'
 import { MinusSmallIcon, PlusSmallIcon, ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 import DeleteCollection from './forms/delete'
+import UpdateCollection from './forms/update'
 
 export default function CollectionsByMonthYear(props) {
 
     const deleteCollection = (id) => {
         props?.delete(id)
     }
+
+    const updateCollection = (id) => {
+        props?.update(id)
+    }
+
     return (
         <div className="bg-white">
             <div className="mx-auto max-w-7xl px-6 sm:py-1 lg:px-8 lg:py-1">
@@ -58,7 +64,7 @@ export default function CollectionsByMonthYear(props) {
                                                             Gryton Share
                                                         </th>
                                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                                            Others
+                                                            Expenses
                                                         </th>
                                                         <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                                             Description
@@ -84,18 +90,11 @@ export default function CollectionsByMonthYear(props) {
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareGryton}</td>
                                                                         {
                                                                             collection?.other > 0 ?
-                                                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.other}</td> :
+                                                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.expenses}</td> :
                                                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK 0</td>
                                                                         }
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.comment}</td>
-                                                                        <td>
-                                                                            <button
-                                                                                type="button"
-                                                                                className="sr-only rounded bg-gray-500 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
-                                                                            >
-                                                                                Edit
-                                                                            </button>
-                                                                        </td>
+
                                                                         <td>
                                                                             <DeleteCollection collectionId={collection?.id} delete={deleteCollection} />
                                                                         </td>
