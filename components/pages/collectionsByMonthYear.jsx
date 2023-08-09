@@ -89,7 +89,7 @@ export default function CollectionsByMonthYear(props) {
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareShop}</td>
                                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.shareGryton}</td>
                                                                         {
-                                                                            collection?.other > 0 ?
+                                                                            collection?.expenses > 0 ?
                                                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.expenses}</td> :
                                                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK 0</td>
                                                                         }
