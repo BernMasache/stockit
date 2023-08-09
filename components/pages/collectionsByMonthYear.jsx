@@ -93,7 +93,7 @@ export default function CollectionsByMonthYear(props) {
                                                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.expenses}</td> :
                                                                                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK 0</td>
                                                                         }
-                                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{collection?.comment}</td>
+                                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">MK {collection?.comment}</td>
 
                                                                         <td>
                                                                             <DeleteCollection collectionId={collection?.id} delete={deleteCollection} />
