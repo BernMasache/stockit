@@ -59,7 +59,7 @@ export default function LoginPage() {
               alt="Your Company"
             /> */}
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Sign in to Stockit
+              Sign in TechWorld Malawi
             </h2>
           </div>
           <form className="space-y-6" onSubmit={loginUser}>
