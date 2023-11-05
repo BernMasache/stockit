@@ -15,6 +15,7 @@ import {
 import { ChevronDownIcon, PlusIcon } from "@heroicons/react/20/solid";
 import StockitReportForm from "../pages/stockitReportForm";
 import { withRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const navigation = {
   main: [
@@ -271,7 +272,7 @@ function UserLayout({ children }) {
                   <div className="space-y-6 border-t border-gray-200 px-4 py-6">
                     <div className="flow-root">
                       <span
-                        className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                        className="text-sm font-medium text-gray-700 hover:text-gray-800 hover:cursor-pointer"
                         onClick={() => {
                           Cookies.remove("STUD");
                           Router.push("login");
@@ -412,7 +413,7 @@ function UserLayout({ children }) {
                 <div className="ml-auto flex items-center">
                   <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                     <span
-                      className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                      className="text-sm font-medium text-gray-700 hover:text-gray-800 hover:cursor-pointer"
                       onClick={() => {
                         Cookies.remove("STUD");
                         Router.push("login");
