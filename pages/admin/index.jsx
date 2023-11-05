@@ -142,16 +142,63 @@ class Page extends React.Component {
         })
     }
 
-    create = (data) => {
-        let rentalFare = useFormula.totalRent(data.rentalFare, data.numberOfDays)
-        let shopShare = useFormula.share(data.collection, data.shareShop, rentalFare, data.expenses)
-        data.shareGryton = shopShare
-        data.rent = rentalFare
-        data.rentPerDay = data.rentalFare
-        useCollectionStore.create(data).then(response => {
+    // create = (data) => {
+    //     let rentalFare = useFormula.totalRent(data.rentalFare, data.numberOfDays)
+    //     let shopShare = useFormula.share(data.collection, data.shareShop, rentalFare, data.expenses)
+    //     data.shareGryton = shopShare
+    //     data.rent = rentalFare
+    //     data.rentPerDay = data.rentalFare
+    //     useCollectionStore.create(data).then(response => {
 
-            if (response.status == 201) {
-                toast.success("Successfully created new collection", {
+    //         if (response.status == 201) {
+    //             toast.success("Successfully created new collection", {
+    //                 position: "top-right",
+    //                 transition: Flip,
+    //                 autoClose: 2000,
+    //                 hideProgressBar: true,
+    //                 closeOnClick: true,
+    //                 pauseOnHover: true,
+    //                 draggable: true,
+    //                 progress: undefined,
+    //                 theme: "light",
+    //             });
+
+    //         } else {
+    //             toast.error("Error occurred", {
+    //                 position: "top-right",
+    //                 transition: Flip,
+    //                 autoClose: 2000,
+    //                 hideProgressBar: true,
+    //                 closeOnClick: true,
+    //                 pauseOnHover: true,
+    //                 draggable: true,
+    //                 progress: undefined,
+    //                 theme: "light",
+    //             });
+    //         }
+    //     }).catch(e => {
+    //         toast.error("Error occurred", {
+    //             position: "top-right",
+    //             transition: Flip,
+    //             autoClose: 2000,
+    //             hideProgressBar: true,
+    //             closeOnClick: true,
+    //             pauseOnHover: true,
+    //             draggable: true,
+    //             progress: undefined,
+    //             theme: "light",
+    //         });
+    //     }).finally(() => {
+    //         this.getCollections()
+    //     })
+    // }
+
+    update = (data) => {
+        console.log(data);
+        useCollectionStore.update(data).then(res => {
+            console.log(res);
+            if (res.status == 200) {
+                toast.success("Successfully deleted the collection No. " + id, {
                     position: "top-right",
                     transition: Flip,
                     autoClose: 2000,
@@ -177,6 +224,7 @@ class Page extends React.Component {
                 });
             }
         }).catch(e => {
+            console.log(e);
             toast.error("Error occurred", {
                 position: "top-right",
                 transition: Flip,
@@ -191,53 +239,6 @@ class Page extends React.Component {
         }).finally(() => {
             this.getCollections()
         })
-    }
-    update = (data) => {
-        // console.log(data);
-        // useCollectionStore.update(data).then(res => {
-        //     console.log(res);
-        //     // if (res.status == 200) {
-        //     //     toast.success("Successfully deleted the collection No. " + id, {
-        //     //         position: "top-right",
-        //     //         transition: Flip,
-        //     //         autoClose: 2000,
-        //     //         hideProgressBar: true,
-        //     //         closeOnClick: true,
-        //     //         pauseOnHover: true,
-        //     //         draggable: true,
-        //     //         progress: undefined,
-        //     //         theme: "light",
-        //     //     });
-
-        //     // } else {
-        //     //     toast.error("Error occurred", {
-        //     //         position: "top-right",
-        //     //         transition: Flip,
-        //     //         autoClose: 2000,
-        //     //         hideProgressBar: true,
-        //     //         closeOnClick: true,
-        //     //         pauseOnHover: true,
-        //     //         draggable: true,
-        //     //         progress: undefined,
-        //     //         theme: "light",
-        //     //     });
-        //     // }
-        // }).catch(e => {
-        //     console.log(e);
-        //     toast.error("Error occurred", {
-        //         position: "top-right",
-        //         transition: Flip,
-        //         autoClose: 2000,
-        //         hideProgressBar: true,
-        //         closeOnClick: true,
-        //         pauseOnHover: true,
-        //         draggable: true,
-        //         progress: undefined,
-        //         theme: "light",
-        //     });
-        // }).finally(() => {
-        //     this.getCollections()
-        // })
     }
     render() {
         return (

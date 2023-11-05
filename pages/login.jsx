@@ -1,31 +1,53 @@
-import { useState } from "react"
-import UseUserStore from "../services/store/user.store"
+import { useState } from "react";
+import UseUserStore from "../services/store/user.store";
+import Cookies from "js-cookie";
+import Router from "next/router";
 
-const useUser = new UseUserStore()
+const useUser = new UseUserStore();
 export default function LoginPage() {
-
   const [userData, setUserData] = useState({
     username: "",
-    password: ""
-  })
+    password: "",
+  });
   const loginDetails = (e) => {
-
     setUserData({
       ...userData,
-      [e.target.name]: e.target.value
-    })
-  }
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const checkValidUser = (user, formData) => {
+    if (user?.data?.length > 0) {
+      let res = user?.data?.filter(
+        (us) =>
+          us?.username === formData?.username &&
+          us?.password === formData?.password
+      );
+
+      if (res?.length == 1) {
+        Cookies.set("STUD", JSON.stringify({ user: user?.res }));
+        return Router.push("/shop");
+      } else {
+      }
+    }
+  };
 
   const loginUser = (e) => {
-    e.preventDefault()
-    if (userData.username == undefined || userData.username == "" || userData.password == undefined || userData.password == "") {
-
+    e.preventDefault();
+    if (
+      userData.username == undefined ||
+      userData.username == "" ||
+      userData.password == undefined ||
+      userData.password == ""
+    ) {
     } else {
-      useUser.login(userData).then(response => {
-        console.log(response);
-      })
+      useUser.login(userData).then((response) => {
+        if (response.status === 200) {
+          checkValidUser(response, userData);
+        }
+      });
     }
-  }
+  };
 
   return (
     <>
@@ -54,7 +76,6 @@ export default function LoginPage() {
                   name="username"
                   type="text"
                   autoComplete="username"
-
                   required
                   className="relative p-2 block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="username"
@@ -89,5 +110,5 @@ export default function LoginPage() {
         </div>
       </div>
     </>
-  )
+  );
 }
