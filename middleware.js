@@ -21,17 +21,17 @@ export async function middleware(request, response) {
     if (
       (token == null || token == undefined || token == "") &&
       (request.nextUrl.pathname == "/admin" ||
-        request.nextUrl.pathname == "/teacher")
+        request.nextUrl.pathname == "/shop")
     ) {
-      return NextResponse.redirect(new URL("/signin", request.url));
+      return NextResponse.redirect(new URL("/login", request.url));
     }
 
     if (
       (token != null && request.nextUrl.pathname == "/") ||
       request.nextUrl.pathname == "/login"
     ) {
-      let shop = token?.role === "admin" ? "/admin" : "/shop";
-      return NextResponse.redirect(new URL(shop, request.url));
+      let user = token?.role === "admin" ? "/admin" : "/shop";
+      return NextResponse.redirect(new URL(user, request.url));
     }
   }
   var url = request.url;

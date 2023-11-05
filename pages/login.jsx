@@ -23,10 +23,9 @@ export default function LoginPage() {
           us?.username === formData?.username &&
           us?.password === formData?.password
       );
-
       if (res?.length == 1) {
-        Cookies.set("STUD", JSON.stringify({ user: user?.res }));
-        return Router.push("/shop");
+        Cookies.set("STUD", JSON.stringify({ user: res[0] }));
+        return Router.push(`/${res[0]?.role}`);
       } else {
       }
     }
