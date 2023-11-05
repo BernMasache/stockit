@@ -14,7 +14,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon, PlusIcon } from "@heroicons/react/20/solid";
 import StockitReportForm from "../pages/stockitReportForm";
-import { Router, withRouter } from "next/router";
+import Router, { withRouter } from "next/router";
 import Cookies from "js-cookie";
 
 const navigation = {
