@@ -163,7 +163,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function UserLayout({ children }) {
+function ShopLayout({ children }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
@@ -581,5 +581,5 @@ function UserLayout({ children }) {
   );
 }
 
-const LayoutComponetWithRouter = withRouter(UserLayout);
+const LayoutComponetWithRouter = withRouter(ShopLayout);
 export default LayoutComponetWithRouter;

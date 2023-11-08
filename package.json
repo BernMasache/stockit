@@ -17,6 +17,7 @@
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "formik": "^2.4.2",
+    "generate-password": "^1.7.1",
     "js-cookie": "^3.0.5",
     "next": "13.4.9",
     "postcss": "8.4.26",
