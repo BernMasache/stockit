@@ -67,7 +67,7 @@ function CollectionPool() {
               onClick={saveToSessionStorage}
               className="bg-orange-600 p-2 text-white rounded-md hover:bg-orange-500"
             >
-              Save to list
+              Add to list
             </button>
             <button
               onClick={() => setOpen(!open)}
