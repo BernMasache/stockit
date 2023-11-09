@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import ShopLayout from "../../../components/layout/shop.layout";
 import { withRouter } from "next/router";
 import SubmitDataComponent from "../../../components/pages/shop/submitToSever";
+import UseCollectionStore from "../../../services/store/collection.store";
+
+const useCollectionStore = new UseCollectionStore();
 
 function CollectionPool() {
   const [open, setOpen] = useState(false);
@@ -17,7 +20,18 @@ function CollectionPool() {
     });
   };
   const saveToSessionStorage = () => {
-    console.log(values);
+    if (
+      values.collection === null ||
+      values.collection === "" ||
+      values.collection === undefined ||
+      values.dateCollected === null ||
+      values.dateCollected === "" ||
+      values.collection === dateCollected
+    ) {
+    } else {
+      
+      console.log(values);
+    }
   };
   return (
     <div>
