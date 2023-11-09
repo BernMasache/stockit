@@ -107,7 +107,7 @@ class CollectionComponent extends React.Component {
                                                     }}
                                                     validationSchema={CollectionSchema()}
                                                     onSubmit={(formData, { resetForm }) => {
-                                                        // console.log(formData)
+                                                        
                                                         var data = Object.assign({}, formData)
                                                         data.dateCollected = JSON.stringify(data.dateCollected)
                                                         this.handleOkay(data)

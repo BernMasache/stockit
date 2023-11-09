@@ -49,16 +49,17 @@ class Page extends React.Component {
   };
 
   create = (data) => {
-    let rentalFare = useFormula.totalRent(data.rentalFare, data.numberOfDays);
-    let shopShare = useFormula.share(
-      data.collection,
-      data.shareShop,
+    let rentalFare = useFormula.totalRent(data?.rentalFare, data?.numberOfDays);
+    let grytonShare = useFormula.share(
+      data?.collection,
+      data?.shareShop,
       rentalFare,
-      data.other
+      data?.other
     );
-    data.shareGryton = shopShare;
+    data.shareGryton = grytonShare;
     data.rent = rentalFare;
-    data.rentPerDay = data.rentalFare;
+    data.rentPerDay = data?.rentalFare;
+    // console.log(data);
     useCollectionStore
       .create(data)
       .then((response) => {
