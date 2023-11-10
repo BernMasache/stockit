@@ -2,7 +2,15 @@ import { useState } from "react";
 import UseUserStore from "../services/store/user.store";
 import Cookies from "js-cookie";
 import Router from "next/router";
-
+import {
+  ToastContainer,
+  toast,
+  Slide,
+  Zoom,
+  Flip,
+  Bounce,
+} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const useUser = new UseUserStore();
 export default function LoginPage() {
   const [userData, setUserData] = useState({
@@ -23,11 +31,47 @@ export default function LoginPage() {
           us?.username === formData?.username &&
           us?.password === formData?.password
       );
+
       if (res?.length == 1) {
         Cookies.set("STUD", JSON.stringify({ user: res[0] }));
+
+        toast.success(`Login successfully.`, {
+          position: "top-right",
+          transition: Flip,
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         return Router.push(`/${res[0]?.role}`);
       } else {
+        toast.error("Invalid user details", {
+          position: "top-right",
+          transition: Flip,
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
+    } else {
+      toast.error("Error occurred", {
+        position: "top-right",
+        transition: Flip,
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -43,6 +87,18 @@ export default function LoginPage() {
       useUser.login(userData).then((response) => {
         if (response.status === 200) {
           checkValidUser(response, userData);
+        } else {
+          toast.error("Error occurred", {
+            position: "top-right",
+            transition: Flip,
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       });
     }
@@ -106,6 +162,7 @@ export default function LoginPage() {
             </div>
           </form>
         </div>
+        <ToastContainer transition={Flip} />
       </div>
     </>
   );

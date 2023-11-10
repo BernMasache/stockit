@@ -12,6 +12,15 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import {
+  ToastContainer,
+  toast,
+  Slide,
+  Zoom,
+  Flip,
+  Bounce,
+} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ChevronDownIcon, PlusIcon } from "@heroicons/react/20/solid";
 import StockitReportForm from "../pages/stockitReportForm";
 import Router, { withRouter } from "next/router";
@@ -415,6 +424,18 @@ function ShopLayout({ children }) {
                     <span
                       className="text-sm font-medium text-gray-700 hover:text-gray-800 hover:cursor-pointer"
                       onClick={() => {
+                        toast.success("Logout successfully.", {
+                          position: "top-right",
+                          transition: Flip,
+                          autoClose: 2000,
+                          hideProgressBar: true,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "light",
+                        });
+
                         Cookies.remove("STUD");
                         Router.push("/login");
                       }}
@@ -577,6 +598,7 @@ function ShopLayout({ children }) {
           </div>
         </footer>
       </div>
+      <ToastContainer transition={Flip} />
     </div>
   );
 }
