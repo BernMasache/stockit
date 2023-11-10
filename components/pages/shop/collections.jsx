@@ -33,6 +33,7 @@ export default function ShopCollections(props) {
 
     return id;
   };
+
   return (
     <div className="p-3">
       <div className="sm:flex sm:items-center">
@@ -48,11 +49,8 @@ export default function ShopCollections(props) {
           <button className="bg-green-700 rounded-md text-white p-2">
             <Link
               href={{
-                pathname: "/shop/collection/" + generate({ length: 8 }),
+                pathname: "/shop/collection/daily",
                 // combine router.query and query props
-                query: {
-                  id: generateId(),
-                },
               }}
               className="text-decoration-none"
             >

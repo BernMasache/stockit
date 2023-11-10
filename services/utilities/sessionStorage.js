@@ -1,11 +1,20 @@
-let sessionStorage = {
-  save: () => {
-    let key = sessionStorage.key("STKV");
-    console.log(key);
+let sessionStorageController = {
+  save: (id, data) => {
+    let key = sessionStorage.key(id);
     if (key == null) {
-      console.log("key null");
+      sessionStorage.setItem(id, JSON.stringify([data]));
+      return {
+        message: "Created",
+      };
     } else {
-      console.log("key available");
+      let values = JSON.parse(sessionStorage.getItem(id));
+      values.push(data);
+      sessionStorage.setItem(id, JSON.stringify(values));
+      return {
+        message: "Added to list",
+      };
     }
   },
 };
+
+export default sessionStorageController;

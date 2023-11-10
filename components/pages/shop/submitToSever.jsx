@@ -1,40 +1,67 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-const people = [
-  {
-    name: "2023-11-01",
-    email: "4000",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    href: "#",
-  },
-  {
-    name: "2023-11-02",
-    email: "7000",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    href: "#",
-  },
-  {
-    name: "2023-11-03",
-    email: "3500",
-    imageUrl:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    href: "#",
-  },
-  {
-    name: "2023-11-04",
-    email: "4000",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    href: "#",
-  },
-];
-
-export default function SubmitDataComponent({ open, setOpen }) {
+import UseCollectionStore from "../../../services/store/collection.store";
+import {
+  ToastContainer,
+  toast,
+  Slide,
+  Zoom,
+  Flip,
+  Bounce,
+} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const useCollectionStore = new UseCollectionStore();
+export default function SubmitDataComponent({ open, setOpen, storageItems }) {
   const cancelButtonRef = useRef(null);
 
+  const submitData = () => {
+    if (storageItems?.length > 0) {
+      useCollectionStore
+        .createDailyCollection(storageItems)
+        .then((res) => {
+          if (res.status == 201) {
+            setOpen(false);
+            toast.success(`Created ${res?.data?.created} entries`, {
+              position: "top-right",
+              transition: Flip,
+              autoClose: 2000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          } else {
+            toast.error("Error occurred", {
+              position: "top-right",
+              transition: Flip,
+              autoClose: 2000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+        })
+        .catch((err) => {
+          toast.error("Error occurred", {
+            position: "top-right",
+            transition: Flip,
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        });
+    }
+  };
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -77,37 +104,49 @@ export default function SubmitDataComponent({ open, setOpen }) {
                   <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                     <Dialog.Title
                       as="h3"
-                      className="text-base font-semibold leading-6 text-gray-900"
+                      className="w-full text-base font-semibold leading-6 text-gray-900 flex flex-col"
                     >
-                      Save Collection
+                      <span>Save Collection</span>
+                      <span> Item removed from the list cannot be undone</span>
                     </Dialog.Title>
-                    <div className="mt-2">
+                    <div className="mt-2 border-t">
                       {/* collections in session storage */}
                       <div>
                         <ul role="list" className="divide-y divide-gray-100">
-                          {people.map((person) => (
-                            <li
-                              key={person.email}
-                              className="mx-auto w-full flex flex-row items-center justify-between gap-x-8 py-2"
-                            >
-                              <div className="flex min-w-0 gap-x-4">
-                                <div className="min-w-0 flex-auto">
-                                  <p className="text-sm font-semibold leading-6 text-gray-900">
-                                    {person.name}
-                                  </p>
-                                  <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                                    {person.email}
-                                  </p>
-                                </div>
-                              </div>
-                              <a
-                                href={person.href}
-                                className="rounded-full bg-red-600 px-2.5 py-1 text-xs font-semibold text-gray-100 shadow-sm ring-1 ring-inset ring-red-300 hover:bg-red-500"
-                              >
-                                Remove
-                              </a>
-                            </li>
-                          ))}
+                          {storageItems?.length > 0
+                            ? storageItems.map((item, key) => (
+                                <li
+                                  key={key}
+                                  className="mx-auto w-full flex flex-row items-center justify-between gap-x-8 py-2"
+                                >
+                                  <div className="flex min-w-0 gap-x-4">
+                                    <div className="min-w-0 flex-auto">
+                                      <p className="text-sm font-semibold leading-6 text-gray-900">
+                                        MK {item.collection}.00
+                                      </p>
+                                      <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                                        {item.dateCollected}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <span
+                                    onClick={() => {
+                                      sessionStorage.setItem(
+                                        "STDD",
+                                        JSON.stringify(
+                                          JSON.parse(
+                                            sessionStorage.getItem("STDD")
+                                          ).filter((item) => item)
+                                        )
+                                      );
+                                    }}
+                                    className="rounded-full bg-red-600 px-2.5 py-1 text-xs font-semibold text-gray-100 shadow-sm ring-1 ring-inset ring-red-300 hover:bg-red-500 hover:cursor-pointer"
+                                  >
+                                    X
+                                  </span>
+                                </li>
+                              ))
+                            : "No collections available"}
                         </ul>
                       </div>
                     </div>
@@ -117,7 +156,7 @@ export default function SubmitDataComponent({ open, setOpen }) {
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto"
-                    onClick={() => setOpen(false)}
+                    onClick={submitData}
                   >
                     Send
                   </button>
@@ -133,6 +172,7 @@ export default function SubmitDataComponent({ open, setOpen }) {
               </Dialog.Panel>
             </Transition.Child>
           </div>
+          <ToastContainer transition={Flip} />
         </div>
       </Dialog>
     </Transition.Root>

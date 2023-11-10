@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ShopLayout from "../../../components/layout/shop.layout";
-import { withRouter } from "next/router";
+import { useRouter, withRouter } from "next/router";
 import SubmitDataComponent from "../../../components/pages/shop/submitToSever";
 import UseCollectionStore from "../../../services/store/collection.store";
-
+import sessionStorageController from "../../../services/utilities/sessionStorage";
+import {
+  ToastContainer,
+  toast,
+  Slide,
+  Zoom,
+  Flip,
+  Bounce,
+} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const useCollectionStore = new UseCollectionStore();
 
 function CollectionPool() {
+  const [storageItems, setStorageItems] = useState([]);
   const [open, setOpen] = useState(false);
 
   const [values, setValues] = useState({
@@ -29,10 +39,27 @@ function CollectionPool() {
       values.collection === dateCollected
     ) {
     } else {
-      
-      console.log(values);
+      let sessionStora = sessionStorageController.save("STDD", values);
+      toast.success(sessionStora?.message, {
+        position: "top-right",
+        transition: Flip,
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
+  useEffect(() => {
+    let data = sessionStorage.getItem("STDD");
+    if (data == null) {
+    } else {
+      setStorageItems(JSON.parse(data));
+    }
+  }, []);
   return (
     <div>
       <div className="border-b border-gray-900/10 pb-12">
@@ -92,7 +119,12 @@ function CollectionPool() {
           </div>
         </div>
       </div>
-      <SubmitDataComponent open={open} setOpen={setOpen} />
+      <SubmitDataComponent
+        open={open}
+        setOpen={setOpen}
+        storageItems={storageItems}
+      />
+      <ToastContainer transition={Flip} />
     </div>
   );
 }
