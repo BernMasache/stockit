@@ -34,7 +34,6 @@ export default function LoginPage() {
 
       if (res?.length == 1) {
         Cookies.set("STUD", JSON.stringify({ user: res[0] }));
-
         toast.success(`Login successfully.`, {
           position: "top-right",
           transition: Flip,
