@@ -33,6 +33,7 @@ export default function LoginPage() {
       );
 
       if (res?.length == 1) {
+        console.log(res);
         Cookies.set("STUD", JSON.stringify({ user: res[0] }));
         toast.success(`Login successfully.`, {
           position: "top-right",
