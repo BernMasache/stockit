@@ -61,7 +61,26 @@ function CollectionPool() {
   const setTheStorageItems = () => {
     setStorageItems([]);
   };
-
+  const removeFromStorage = (index) => {
+    let data = sessionStorage.getItem("STDD");
+    if (data == null) {
+    } else {
+      let remainingItems = JSON.parse(data);
+      remainingItems?.splice(index, 1);
+      if (remainingItems.length > 0 || remainingItems.length == 0) {
+        sessionStorage.setItem("STDD", JSON.stringify(remainingItems));
+        let dat = sessionStorage.getItem("STDD");
+        setStorageItems(JSON.parse(dat));
+      }
+    }
+  };
+  useEffect(() => {
+    let data = sessionStorage.getItem("STDD");
+    if (data == null) {
+    } else {
+      setStorageItems(JSON.parse(data));
+    }
+  }, []);
   return (
     <div>
       <div className="border-b border-gray-900/10 pb-12">
@@ -126,6 +145,7 @@ function CollectionPool() {
         setOpen={setOpen}
         storageItems={storageItems}
         setTheStorageItems={setTheStorageItems}
+        removeFromStorage={removeFromStorage}
       />
       <ToastContainer transition={Flip} />
     </div>

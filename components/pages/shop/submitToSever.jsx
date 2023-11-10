@@ -17,6 +17,7 @@ export default function SubmitDataComponent({
   setOpen,
   storageItems,
   setTheStorageItems,
+  removeFromStorage,
 }) {
   const cancelButtonRef = useRef(null);
 
@@ -137,16 +138,7 @@ export default function SubmitDataComponent({
                                     </div>
                                   </div>
                                   <span
-                                    onClick={() => {
-                                      sessionStorage.setItem(
-                                        "STDD",
-                                        JSON.stringify(
-                                          JSON.parse(
-                                            sessionStorage.getItem("STDD")
-                                          ).filter((item) => item)
-                                        )
-                                      );
-                                    }}
+                                    onClick={() => removeFromStorage(key)}
                                     className="rounded-full bg-red-600 px-2.5 py-1 text-xs font-semibold text-gray-100 shadow-sm ring-1 ring-inset ring-red-300 hover:bg-red-500 hover:cursor-pointer"
                                   >
                                     X
