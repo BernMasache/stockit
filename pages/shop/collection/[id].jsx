@@ -67,10 +67,13 @@ function CollectionPool() {
     } else {
       let remainingItems = JSON.parse(data);
       remainingItems?.splice(index, 1);
-      if (remainingItems.length > 0 || remainingItems.length == 0) {
+      if (remainingItems.length > 0) {
         sessionStorage.setItem("STDD", JSON.stringify(remainingItems));
         let dat = sessionStorage.getItem("STDD");
         setStorageItems(JSON.parse(dat));
+      } else if (remainingItems.length == 0) {
+        sessionStorage.removeItem("STDD");
+        setStorageItems([]);
       }
     }
   };
