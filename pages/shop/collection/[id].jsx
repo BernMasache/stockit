@@ -40,6 +40,11 @@ function CollectionPool() {
     ) {
     } else {
       let sessionStora = sessionStorageController.save("STDD", values);
+      let data = sessionStorage.getItem("STDD");
+      if (data == null) {
+      } else {
+        setStorageItems(JSON.parse(data));
+      }
       toast.success(sessionStora?.message, {
         position: "top-right",
         transition: Flip,
@@ -53,13 +58,10 @@ function CollectionPool() {
       });
     }
   };
-  useEffect(() => {
-    let data = sessionStorage.getItem("STDD");
-    if (data == null) {
-    } else {
-      setStorageItems(JSON.parse(data));
-    }
-  }, []);
+  const setTheStorageItems = () => {
+    setStorageItems([]);
+  };
+
   return (
     <div>
       <div className="border-b border-gray-900/10 pb-12">
@@ -123,6 +125,7 @@ function CollectionPool() {
         open={open}
         setOpen={setOpen}
         storageItems={storageItems}
+        setTheStorageItems={setTheStorageItems}
       />
       <ToastContainer transition={Flip} />
     </div>

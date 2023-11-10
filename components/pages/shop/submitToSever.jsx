@@ -12,7 +12,12 @@ import {
 } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const useCollectionStore = new UseCollectionStore();
-export default function SubmitDataComponent({ open, setOpen, storageItems }) {
+export default function SubmitDataComponent({
+  open,
+  setOpen,
+  storageItems,
+  setTheStorageItems,
+}) {
   const cancelButtonRef = useRef(null);
 
   const submitData = () => {
@@ -21,6 +26,8 @@ export default function SubmitDataComponent({ open, setOpen, storageItems }) {
         .createDailyCollection(storageItems)
         .then((res) => {
           if (res.status == 201) {
+            sessionStorage.removeItem("STDD");
+            setTheStorageItems();
             setOpen(false);
             toast.success(`Created ${res?.data?.created} entries`, {
               position: "top-right",
