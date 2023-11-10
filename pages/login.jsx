@@ -83,6 +83,17 @@ export default function LoginPage() {
       userData.password == undefined ||
       userData.password == ""
     ) {
+      toast.error("Usename or password cannot be empty", {
+        position: "top-right",
+        transition: Flip,
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     } else {
       useUser.login(userData).then((response) => {
         if (response.status === 200) {
