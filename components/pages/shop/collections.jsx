@@ -50,13 +50,7 @@ export default function ShopCollections(props) {
         <div className="mt-8 flow-root">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8 h-[70vh]">
-              {/* <CollectionsByMonthYear
-                collectionsConfiguration={props.collectionsConfiguration}
-                delete={deleteCollection}
-                collections={props?.collections}
-                dates={uniqueMonthYear(props?.collections)}
-                update={updateCollection}
-              /> */}
+             
               <DailyCollectionsByMonthYear
                 dates={uniqueMonthYear(props?.collections)}
                 collections={props?.collections}

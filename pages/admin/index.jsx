@@ -23,6 +23,7 @@ class Page extends React.Component {
     this.state = {
       loading: false,
       collections: [],
+      dailyCollections: [],
       collectionsConfiguration: [],
     };
   }
@@ -30,11 +31,19 @@ class Page extends React.Component {
   componentDidMount() {
     this.getCollections();
     this.getCollectionConfigurations();
+    this.getDailyCollections();
   }
   getCollections = () => {
     useCollectionStore.getCollections().then((collections) => {
       this.setState({
         collections: collections.data,
+      });
+    });
+  };
+  getDailyCollections = () => {
+    useCollectionStore.getDailyCollections().then((dailyCollections) => {
+      this.setState({
+        dailyCollections: dailyCollections.data,
       });
     });
   };
@@ -227,13 +236,14 @@ class Page extends React.Component {
             </button>
           </div>
         </div>
-        {/* <CollectionsByMonthYear /> */}
+
         <Collections
           collections={this.state.collections}
           create={this.create}
           delete={this.delete}
           update={this.update}
           collectionsConfiguration={this.state.collectionsConfiguration}
+          dailyCollections={this.state.dailyCollections}
         />
         <ToastContainer transition={Flip} />
       </div>

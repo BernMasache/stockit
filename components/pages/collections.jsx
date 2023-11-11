@@ -1,7 +1,33 @@
+import { useState } from "react";
 import CollectionComponent from "../../components/pages/stockitReportForm";
 import CollectionsByMonthYear from "./collectionsByMonthYear";
+import {
+  BuildingOfficeIcon,
+  CreditCardIcon,
+  ListBulletIcon,
+} from "@heroicons/react/20/solid";
+import DailyCollectionsByMonthYear from "./shop/dailyCollectionsByMonthYear";
 
+const tabs = [
+  {
+    name: "Aggreagte Collections",
+    href: "#",
+    icon: CreditCardIcon,
+    current: false,
+  },
+  {
+    name: "Daily Collections",
+    href: "#",
+    icon: ListBulletIcon,
+    current: false,
+  },
+];
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 export default function Collections(props) {
+  const [tabIndex, setTabIndex] = useState(0);
   const uniqueMonthYear = (data) => {
     let dates = [];
     let splittedDate = "";
@@ -14,6 +40,20 @@ export default function Collections(props) {
     });
     return [...new Set(dates)];
   };
+
+  const uniqueDatesMonthYear = (data) => {
+    let dates = [];
+    let splittedDate = "";
+    data?.map((allDates) => {
+      splittedDate =
+        allDates.dateCollected?.split("-")[0] +
+        "-" +
+        allDates.dateCollected?.split("-")[1];
+      dates.push(splittedDate);
+    });
+    return [...new Set(dates)];
+  };
+
   const deleteCollection = (id) => {
     props?.delete(id);
   };
@@ -39,23 +79,71 @@ export default function Collections(props) {
           />
         </div>
       </div>
-      {props?.collections.length > 0 ? (
-        <div className="mt-8 flow-root">
-          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8 h-[70vh]">
-              <CollectionsByMonthYear
-                collectionsConfiguration={props.collectionsConfiguration}
-                delete={deleteCollection}
-                collections={props?.collections}
-                dates={uniqueMonthYear(props?.collections)}
-                update={updateCollection}
-              />
+      <div className="">
+        <div className="">
+          <div className="border-b border-gray-200">
+            <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+              {tabs.map((tab, key) => (
+                <a
+                  key={tab.name}
+                  href={tab.href}
+                  onClick={() => setTabIndex(key)}
+                  className={classNames(
+                    tab.current
+                      ? "border-indigo-500 text-indigo-600"
+                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
+                    "group inline-flex items-center border-b-2 py-4 px-1 text-sm font-medium"
+                  )}
+                  aria-current={tab.current ? "page" : undefined}
+                >
+                  <tab.icon
+                    className={classNames(
+                      tab.current
+                        ? "text-indigo-500"
+                        : "text-gray-400 group-hover:text-gray-500",
+                      "-ml-0.5 mr-2 h-5 w-5"
+                    )}
+                    aria-hidden="true"
+                  />
+                  <span>{tab.name}</span>
+                </a>
+              ))}
+            </nav>
+            <div className="">
+              {tabIndex == 0 ? (
+                <div className="">
+                  {props?.collections.length > 0 ? (
+                    <div className="mt-8 flow-root">
+                      <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8 h-[70vh]">
+                          <CollectionsByMonthYear
+                            collectionsConfiguration={
+                              props.collectionsConfiguration
+                            }
+                            delete={deleteCollection}
+                            collections={props?.collections}
+                            dates={uniqueMonthYear(props?.collections)}
+                            update={updateCollection}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              ) : (
+                <div className="">
+                  <DailyCollectionsByMonthYear
+                    dates={uniqueDatesMonthYear(props?.dailyCollections)}
+                    dailyCollections={props?.dailyCollections}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
-      ) : (
-        ""
-      )}
+      </div>
     </div>
   );
 }

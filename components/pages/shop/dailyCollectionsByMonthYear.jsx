@@ -1,18 +1,8 @@
 import { Disclosure } from "@headlessui/react";
-import {
-  MinusSmallIcon,
-  PlusSmallIcon,
-  ChevronUpIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/24/outline";
-import DeleteCollection from "../forms/delete";
-import UpdateCollection from "../forms/update";
-import UpdateModal from "../forms/updateModal";
+import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
 export default function DailyCollectionsByMonthYear(props) {
-  const [openModal, setOpenModal] = useState(false);
-
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-6 sm:py-1 lg:px-8 lg:py-1">
@@ -84,7 +74,7 @@ export default function DailyCollectionsByMonthYear(props) {
                             </tr>
                           </thead>
                           <tbody className="bg-white">
-                            {props?.collections?.map((collection) => {
+                            {props?.dailyCollections?.map((collection) => {
                               return (
                                 <tr
                                   key={collection?.id}
