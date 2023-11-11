@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 export async function middleware(request, response) {
   var tokenUser = request.cookies.get("STUD");
-
   if (tokenUser === undefined || tokenUser === null || tokenUser === "") {
     if (request.nextUrl.pathname === "/") {
       return NextResponse.redirect(new URL("/login", request.url));
@@ -14,10 +13,9 @@ export async function middleware(request, response) {
     }
   } else {
     var token = JSON.parse(tokenUser.value).user;
-
-    if (request.nextUrl.pathname === "/") {
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
+    // if (request.nextUrl.pathname === "/") {
+    //   return NextResponse.redirect(new URL("/login", request.url));
+    // }
     if (
       (token === null || token === undefined || token === "") &&
       (request.nextUrl.pathname === "/admin" ||
@@ -25,7 +23,6 @@ export async function middleware(request, response) {
     ) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
-
     if (
       (token !== null && request.nextUrl.pathname === "/") ||
       request.nextUrl.pathname == "/login"
