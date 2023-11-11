@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ShopLayout from "../../../components/layout/shop.layout";
-import { useRouter, withRouter } from "next/router";
+import Router, { withRouter } from "next/router";
 import SubmitDataComponent from "../../../components/pages/shop/submitToSever";
 import UseCollectionStore from "../../../services/store/collection.store";
 import sessionStorageController from "../../../services/utilities/sessionStorage";
@@ -139,6 +139,13 @@ function CollectionPool() {
               className="bg-green-600 p-2 text-white rounded-md hover:bg-green-500"
             >
               Submit
+            </button>
+
+            <button
+              onClick={() => Router.push("/")}
+              className="bg-blue-600 p-2 text-white rounded-md hover:bg-blue-500"
+            >
+              Back
             </button>
           </div>
         </div>

@@ -23,8 +23,11 @@ export default function SubmitDataComponent({
 
   const submitData = () => {
     if (storageItems?.length > 0) {
+      let orderedData = storageItems?.sort(
+        (a, b) => new Date(a.dateCollected) - new Date(b.dateCollected)
+      );
       useCollectionStore
-        .createDailyCollection(storageItems)
+        .createDailyCollection(orderedData)
         .then((res) => {
           if (res.status == 201) {
             sessionStorage.removeItem("STDD");
@@ -122,29 +125,35 @@ export default function SubmitDataComponent({
                       <div>
                         <ul role="list" className="divide-y divide-gray-100">
                           {storageItems?.length > 0
-                            ? storageItems.map((item, key) => (
-                                <li
-                                  key={key}
-                                  className="mx-auto w-full flex flex-row items-center justify-between gap-x-8 py-2"
-                                >
-                                  <div className="flex min-w-0 gap-x-4">
-                                    <div className="min-w-0 flex-auto">
-                                      <p className="text-sm font-semibold leading-6 text-gray-900">
-                                        MK {item.collection}.00
-                                      </p>
-                                      <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                                        {item.dateCollected}
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <span
-                                    onClick={() => removeFromStorage(key)}
-                                    className="rounded-full bg-red-600 px-2.5 py-1 text-xs font-semibold text-gray-100 shadow-sm ring-1 ring-inset ring-red-300 hover:bg-red-500 hover:cursor-pointer"
+                            ? storageItems
+                                .sort(
+                                  (a, b) =>
+                                    new Date(a.dateCollected) -
+                                    new Date(b.dateCollected)
+                                )
+                                .map((item, key) => (
+                                  <li
+                                    key={key}
+                                    className="mx-auto w-full flex flex-row items-center justify-between gap-x-8 py-2"
                                   >
-                                    X
-                                  </span>
-                                </li>
-                              ))
+                                    <div className="flex min-w-0 gap-x-4">
+                                      <div className="min-w-0 flex-auto">
+                                        <p className="text-sm font-semibold leading-6 text-gray-900">
+                                          MK {item.collection}.00
+                                        </p>
+                                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                                          {item.dateCollected}
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <span
+                                      onClick={() => removeFromStorage(key)}
+                                      className="rounded-full bg-red-600 px-2.5 py-1 text-xs font-semibold text-gray-100 shadow-sm ring-1 ring-inset ring-red-300 hover:bg-red-500 hover:cursor-pointer"
+                                    >
+                                      X
+                                    </span>
+                                  </li>
+                                ))
                             : "No collections available"}
                         </ul>
                       </div>
