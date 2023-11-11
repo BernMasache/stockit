@@ -2,6 +2,7 @@ import CollectionComponent from "../stockitReportForm";
 import CollectionsByMonthYear from "../collectionsByMonthYear";
 import Link from "next/link";
 import { generate } from "generate-password";
+import DailyCollectionsByMonthYear from "./dailyCollectionsByMonthYear";
 
 export default function ShopCollections(props) {
   const uniqueMonthYear = (data) => {
@@ -9,29 +10,15 @@ export default function ShopCollections(props) {
     let splittedDate = "";
     data?.map((allDates) => {
       splittedDate =
-        JSON.parse(allDates.dateCollected)?.split("-")[0] +
+        allDates.dateCollected?.split("-")[0] +
         "-" +
-        JSON.parse(allDates.dateCollected)?.split("-")[1];
+        allDates.dateCollected?.split("-")[1];
       dates.push(splittedDate);
     });
     return [...new Set(dates)];
   };
   const deleteCollection = (id) => {
     props?.delete(id);
-  };
-  const updateCollection = (data) => {
-    console.log(data);
-    // props?.update(data)
-  };
-  const generateId = () => {
-    let id = generate({
-      length: 10,
-      uppercase: false,
-      lowercase: true,
-      numbers: true,
-    });
-
-    return id;
   };
 
   return (
@@ -59,23 +46,27 @@ export default function ShopCollections(props) {
           </button>
         </div>
       </div>
-      {/* {props?.collections.length > 0 ? (
+      {props?.collections.length > 0 ? (
         <div className="mt-8 flow-root">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8 h-[70vh]">
-              <CollectionsByMonthYear
+              {/* <CollectionsByMonthYear
                 collectionsConfiguration={props.collectionsConfiguration}
                 delete={deleteCollection}
                 collections={props?.collections}
                 dates={uniqueMonthYear(props?.collections)}
                 update={updateCollection}
+              /> */}
+              <DailyCollectionsByMonthYear
+                dates={uniqueMonthYear(props?.collections)}
+                collections={props?.collections}
               />
             </div>
           </div>
         </div>
       ) : (
         ""
-      )} */}
+      )}
     </div>
   );
 }

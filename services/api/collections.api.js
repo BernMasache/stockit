@@ -63,7 +63,12 @@ export default class UseCollectionService {
     );
     return result;
   };
-
+  getDailyCollections = async () => {
+    const collections = await httpRequest.get(URL + "?sheet=shop", {
+      headers,
+    });
+    return collections;
+  };
   updateCollection = async (body) => {
     body.lastUpdated = "DATETIME";
 

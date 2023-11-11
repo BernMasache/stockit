@@ -21,7 +21,10 @@ export default class UseCollectionStore {
     const response = await useCollectionService.createDailyCollection(data);
     return response;
   };
-
+  getDailyCollections = async () => {
+    const collections = await useCollectionService.getDailyCollections();
+    return collections;
+  };
   update = async (data) => {
     const response = await useCollectionService.updateCollection(data);
     return response;
