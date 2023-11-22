@@ -63,7 +63,7 @@ class Page extends React.Component {
       data?.collection,
       data?.shareShop,
       rentalFare,
-      data?.other
+      data?.expenses
     );
     data.shareGryton = grytonShare;
     data.rent = rentalFare;
