@@ -29,8 +29,5 @@ export default class UseDataCalculation {
       { name: "November", id: "11" },
       { name: "December", id: "12" },
     ];
-    console.log(data);
-    console.log(list);
-    // return list;
   };
 }

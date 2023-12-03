@@ -92,4 +92,10 @@ export default class UseCollectionService {
     });
     return result;
   };
+  deleteDailyCollection = async (id) => {
+    const result = await httpRequest.delete(URL, id + "?sheet=shop", {
+      headers,
+    });
+    return result;
+  };
 }

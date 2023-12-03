@@ -4,7 +4,7 @@ import { useState } from "react";
 import DeleteCollection from "../forms/delete";
 
 export default function DailyCollectionsByMonthYear({
-  deleteCollection,
+  deleteDailyCollection,
   dates,
   dailyCollections,
 }) {
@@ -101,7 +101,7 @@ export default function DailyCollectionsByMonthYear({
                                           <td>
                                             <DeleteCollection
                                               collectionId={collection?.id}
-                                              delete={deleteCollection}
+                                              delete={deleteDailyCollection}
                                             />
                                           </td>
                                         </>

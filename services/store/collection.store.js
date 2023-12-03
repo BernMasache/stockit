@@ -33,4 +33,8 @@ export default class UseCollectionStore {
     const response = await useCollectionService.deleteCollection(id);
     return response;
   };
+  deleteDailyCollection = async (id) => {
+    const response = await useCollectionService.deleteDailyCollection(id);
+    return response;
+  };
 }

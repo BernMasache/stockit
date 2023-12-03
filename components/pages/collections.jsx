@@ -64,8 +64,11 @@ export default function Collections(props) {
   const deleteCollection = (id) => {
     props?.delete(id);
   };
+  const deleteDailyCollection = (id) => {
+    props?.deleteDailyCollection(id);
+  };
   const updateCollection = (data) => {
-    console.log(data);
+    // console.log(data);
     // props?.update(data)
   };
   return (
@@ -150,7 +153,7 @@ export default function Collections(props) {
                 <DailyCollectionsByMonthYear
                   dates={uniqueDatesMonthYear(props?.dailyCollections)}
                   dailyCollections={props?.dailyCollections}
-                  deleteCollection={deleteCollection}
+                  deleteDailyCollection={deleteDailyCollection}
                 />
               </div>
             )}
