@@ -38,10 +38,62 @@ class Page extends React.Component {
       });
     });
   };
+
+  deleteDailyCollection = (id) => {
+    useCollectionStore
+      .deleteDailyCollection(id)
+      .then((res) => {
+        if (res.status == 200) {
+          toast.success("Successfully deleted the collection No. " + id, {
+            position: "top-right",
+            transition: Flip,
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          toast.error("Error occurred", {
+            position: "top-right",
+            transition: Flip,
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      })
+      .catch((e) => {
+        toast.error("Error occurred", {
+          position: "top-right",
+          transition: Flip,
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      })
+      .finally(() => {
+        this.getDailyCollections();
+      });
+  };
+
   render() {
     return (
       <div>
-        <ShopCollections collections={this.state.collections} />
+        <ShopCollections
+          collections={this.state.collections}
+          deleteDailyCollection={this.deleteDailyCollection}
+        />
         <ToastContainer transition={Flip} />
       </div>
     );

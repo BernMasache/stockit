@@ -17,10 +17,9 @@ export default function ShopCollections(props) {
     });
     return [...new Set(dates)];
   };
-  const deleteCollection = (id) => {
-    props?.delete(id);
+  const deleteDailyCollection = (id) => {
+    props?.deleteDailyCollection(id);
   };
-
   return (
     <div className="p-3">
       <div className="sm:flex sm:items-center">
@@ -53,6 +52,7 @@ export default function ShopCollections(props) {
               <DailyCollectionsByMonthYear
                 dates={uniqueMonthYear(props?.collections)}
                 dailyCollections={props?.collections}
+                deleteDailyCollection={deleteDailyCollection}
               />
             </div>
           </div>
