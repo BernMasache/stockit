@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import dynamic from "next/dynamic";
 import UseDataCalculation from "../../../services/utilities/formula";
+import dashboardControl from "../../../services/utilities/dashboardControls";
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
@@ -9,19 +10,26 @@ export default function MonthlyTotalsPerYear({ collections }) {
   const dataFunction = (data) => {
     let sAssigned = data?.reduce((subjAssingedList, subjAssinged) => {
       (subjAssingedList[
-        subjAssinged?.dateCollected?.split("-").slice(0, 2).join("-")
+        JSON.parse(subjAssinged?.dateCollected)
+          ?.split("-")
+          .slice(0, 2)
+          .join("-")
       ] =
         subjAssingedList[
-          subjAssinged?.dateCollected?.split("-").slice(0, 2).join("-")
+          JSON.parse(subjAssinged?.dateCollected)
+            ?.split("-")
+            .slice(0, 2)
+            .join("-")
         ] || []).push(subjAssinged);
       return subjAssingedList;
     }, {});
-    // console.log(sAssigned);
+
     if (typeof sAssigned == "undefined") {
     } else {
       return sAssigned;
     }
   };
+
   useEffect(() => {
     dataCalculations.monthlyTotal({
       "2023-07": [
@@ -41,7 +49,8 @@ export default function MonthlyTotalsPerYear({ collections }) {
       ],
     });
     dataFunction(collections);
-  });
+    // console.log(dataFunction(collections));
+  }, []);
   const state = {
     options: {
       chart: {
@@ -67,10 +76,7 @@ export default function MonthlyTotalsPerYear({ collections }) {
     series: [
       {
         name: "Monthly Total",
-        data: [
-          89000, 67000, 80000, 67000, 69840, 50000, 67890, 70000, 56000, 80500,
-          100000, 76000,
-        ],
+        data: dashboardControl.series(dataFunction(collections)),
       },
     ],
     plotOptions: {
