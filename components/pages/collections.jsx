@@ -121,7 +121,7 @@ export default function Collections(props) {
           <div className="mt-4">
             {tabIndex == 0 ? (
               <div className="">
-                <MonthlyTotalsPerYear />
+                <MonthlyTotalsPerYear collections={props?.collections} />
               </div>
             ) : tabIndex == 1 ? (
               <div className="">
@@ -150,6 +150,7 @@ export default function Collections(props) {
                 <DailyCollectionsByMonthYear
                   dates={uniqueDatesMonthYear(props?.dailyCollections)}
                   dailyCollections={props?.dailyCollections}
+                  deleteCollection={deleteCollection}
                 />
               </div>
             )}

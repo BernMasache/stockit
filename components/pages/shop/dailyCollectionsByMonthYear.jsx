@@ -1,14 +1,15 @@
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import DeleteCollection from "../forms/delete";
 
-export default function DailyCollectionsByMonthYear(props) {
+export default function DailyCollectionsByMonthYear({deleteCollection, dates}) {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-6 sm:py-1 lg:px-8 lg:py-1">
         <div className="mx-auto w-full divide-y divide-gray-900/10">
           <dl className="mt-2 space-y-6 divide-y divide-gray-900/10">
-            {props?.dates
+            {dates
               .sort((a, b) => new Date(a) - new Date(b))
               .map((date, key) => (
                 <Disclosure as="div" key={key} className="pt-1">
@@ -74,7 +75,7 @@ export default function DailyCollectionsByMonthYear(props) {
                             </tr>
                           </thead>
                           <tbody className="bg-white">
-                            {props?.dailyCollections?.map((collection) => {
+                            {dailyCollections?.map((collection) => {
                               return (
                                 <tr
                                   key={collection?.id}
@@ -90,13 +91,13 @@ export default function DailyCollectionsByMonthYear(props) {
                                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                         MK {collection?.collection}
                                       </td>
-                                      {/* 
-                                    <td>
-                                      <DeleteCollection
-                                        collectionId={collection?.id}
-                                        delete={deleteCollection}
-                                      />
-                                    </td> */}
+
+                                      <td>
+                                        <DeleteCollection
+                                          collectionId={collection?.id}
+                                          delete={deleteCollection}
+                                        />
+                                      </td>
                                     </>
                                   ) : (
                                     ""
