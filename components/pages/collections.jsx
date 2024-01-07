@@ -124,7 +124,10 @@ export default function Collections(props) {
           <div className="mt-4">
             {tabIndex == 0 ? (
               <div className="">
-                <MonthlyTotalsPerYear collections={props?.collections} />
+                <MonthlyTotalsPerYear
+                  collections={props?.collections}
+                  dailyCollections={props?.dailyCollections}
+                />
               </div>
             ) : tabIndex == 1 ? (
               <div className="">

@@ -550,9 +550,7 @@ function UserLayout({ children }) {
           </Dialog>
         </Transition.Root>
 
-        <main className="mx-auto max-w-2xl px-4 lg:max-w-7xl lg:px-8">
-          {children}
-        </main>
+        <main className="mx-auto max-w-9xl px-4 lg:px-8">{children}</main>
 
         <footer className="bg-white">
           <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
