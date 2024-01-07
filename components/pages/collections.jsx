@@ -35,7 +35,9 @@ function classNames(...classes) {
 }
 export default function Collections(props) {
   const [tabIndex, setTabIndex] = useState(0);
-  const [period, setPeriod] = useState(new Date().getFullYear());
+  const [period, setPeriod] = useState(
+    JSON.stringify(new Date().getFullYear())
+  );
 
   const uniqueMonthYear = (data) => {
     let dates = [];
@@ -59,11 +61,12 @@ export default function Collections(props) {
     return years;
   };
   const filteredCollection = (filteredPeriod, collection) => {
-    // console.log(collection);
-    let colls = collection?.filter(
-      (coll) =>
-        JSON.parse(coll?.dateCollected)?.split("-")[0] === filteredPeriod
-    );
+    let colls =
+      collection &&
+      collection?.filter(
+        (coll) =>
+          JSON.parse(coll?.dateCollected)?.split("-")[0] === filteredPeriod
+      );
     return colls;
   };
 
@@ -160,7 +163,7 @@ export default function Collections(props) {
                     defaultValue={setYears()[0]?.year}
                     onChange={(event) => setPeriod(event?.target?.value)}
                   >
-                    {setYears().map((year, key) => {
+                    {setYears()?.map((year, key) => {
                       return (
                         <option key={key} value={year?.year}>
                           {year?.year}
@@ -173,7 +176,9 @@ export default function Collections(props) {
                 </div>
                 {period && (
                   <MonthlyTotalsPerYear
-                    collections={filteredCollection(period, props?.collections)}
+                    collections={
+                      period && filteredCollection(period, props?.collections)
+                    }
                     dailyCollections={props?.dailyCollections}
                   />
                 )}
