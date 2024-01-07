@@ -14,11 +14,11 @@ const dashboardControl = {
     { name: "December", id: "12" },
   ],
   series: (serie) => {
-    let keys = Object.keys(serie);
+    let keys = serie && Object.keys(serie);
 
     let values = [];
     let newContainer = [];
-    for (let index = 0; index < keys.length; index++) {
+    for (let index = 0; index < keys?.length; index++) {
       let total = 0;
       const element = serie[keys[index]];
 
@@ -44,27 +44,28 @@ const dashboardControl = {
       { name: "October", id: "10" },
       { name: "November", id: "11" },
       { name: "December", id: "12" },
-    ]?.map((t, k) => {
-      let df = values?.filter((ss) => ss?.x?.split("-")[1] == t?.id);
-
+    ]?.map((month, k) => {
+      let df = values?.filter((ss) => ss?.x?.split("-")[1] == month?.id);
       if (df?.length == 0) {
-        newContainer.push({ x: keys[0]?.split("-")[0] + t?.id, y: 0 });
+        newContainer.push({
+          x: keys && keys[0]?.split("-")[0] + month?.id,
+          y: 0,
+        });
       } else {
         newContainer.push(df[0]);
       }
     });
-
     return newContainer;
   },
 
   averageSeriesData: (serie) => {
-    let keys = Object.keys(serie);
+    let keys = serie && Object.keys(serie);
 
     let values = [];
     let newContainer = [];
     for (let index = 0; index < keys.length; index++) {
       let total = 0;
-      const element = serie[keys[index]];
+      const element = serie && serie[keys[index]];
 
       for (let y = 0; y < element?.length; y++) {
         const value = element[y];
@@ -88,11 +89,11 @@ const dashboardControl = {
       { name: "October", id: "10" },
       { name: "November", id: "11" },
       { name: "December", id: "12" },
-    ]?.map((t, k) => {
-      let df = values?.filter((ss) => ss?.x?.split("-")[1] == t?.id);
+    ]?.map((month, k) => {
+      let df = values?.filter((ss) => ss?.x?.split("-")[1] == month?.id);
 
       if (df?.length == 0) {
-        newContainer?.push({ x: keys[0]?.split("-")[0] + t?.id, y: 0 });
+        newContainer?.push({ x: keys[0]?.split("-")[0] + month?.id, y: 0 });
       } else {
         newContainer?.push(df[0]);
       }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CollectionComponent from "../../components/pages/stockitReportForm";
 import CollectionsByMonthYear from "./collectionsByMonthYear";
 import {
@@ -35,6 +35,8 @@ function classNames(...classes) {
 }
 export default function Collections(props) {
   const [tabIndex, setTabIndex] = useState(0);
+  const [period, setPeriod] = useState(new Date().getFullYear());
+
   const uniqueMonthYear = (data) => {
     let dates = [];
     let splittedDate = "";
@@ -46,6 +48,23 @@ export default function Collections(props) {
       dates.push(splittedDate);
     });
     return [...new Set(dates)];
+  };
+  const setYears = () => {
+    let year = new Date().getFullYear();
+    let years = [];
+    for (let index = 0; index < 20; index++) {
+      years?.push({ id: index + 1, year: year });
+      year = year - 1;
+    }
+    return years;
+  };
+  const filteredCollection = (filteredPeriod, collection) => {
+    // console.log(collection);
+    let colls = collection?.filter(
+      (coll) =>
+        JSON.parse(coll?.dateCollected)?.split("-")[0] === filteredPeriod
+    );
+    return colls;
   };
 
   const uniqueDatesMonthYear = (data) => {
@@ -71,6 +90,9 @@ export default function Collections(props) {
     // console.log(data);
     // props?.update(data)
   };
+  useEffect(() => {
+    // console.log(props?.collections);
+  });
   return (
     <div className="p-3">
       <div className="sm:flex sm:items-center">
@@ -124,10 +146,37 @@ export default function Collections(props) {
           <div className="mt-4">
             {tabIndex == 0 ? (
               <div className="">
-                <MonthlyTotalsPerYear
-                  collections={props?.collections}
-                  dailyCollections={props?.dailyCollections}
-                />
+                <div className="max-w-sm">
+                  <label
+                    htmlFor="location"
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
+                    Select Period
+                  </label>
+                  <select
+                    id="location"
+                    name="location"
+                    className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    defaultValue={setYears()[0]?.year}
+                    onChange={(event) => setPeriod(event?.target?.value)}
+                  >
+                    {setYears().map((year, key) => {
+                      return (
+                        <option key={key} value={year?.year}>
+                          {year?.year}
+                        </option>
+                      );
+                    })}
+                    <option>Canada</option>
+                    <option>Mexico</option>
+                  </select>
+                </div>
+                {period && (
+                  <MonthlyTotalsPerYear
+                    collections={filteredCollection(period, props?.collections)}
+                    dailyCollections={props?.dailyCollections}
+                  />
+                )}
               </div>
             ) : tabIndex == 1 ? (
               <div className="">

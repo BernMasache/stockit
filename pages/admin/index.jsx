@@ -40,6 +40,7 @@ class Page extends React.Component {
       });
     });
   };
+  
   getDailyCollections = () => {
     useCollectionStore.getDailyCollections().then((dailyCollections) => {
       this.setState({
@@ -47,6 +48,7 @@ class Page extends React.Component {
       });
     });
   };
+
   getCollectionConfigurations = () => {
     useCollectionStore
       .getCollectionConfigurations()

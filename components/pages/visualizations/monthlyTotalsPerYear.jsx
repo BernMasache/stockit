@@ -52,7 +52,7 @@ export default function MonthlyTotalsPerYear({
 
   useEffect(() => {
     dataFunction(collections);
-    // console.log(dataFunction(collections));
+    console.log(dataFunction(collections));
   }, []);
   const state = {
     options: {
