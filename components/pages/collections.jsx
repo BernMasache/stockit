@@ -154,7 +154,7 @@ export default function Collections(props) {
                     htmlFor="location"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    Select Period
+                    Select Year
                   </label>
                   <select
                     id="location"
@@ -170,8 +170,6 @@ export default function Collections(props) {
                         </option>
                       );
                     })}
-                    <option>Canada</option>
-                    <option>Mexico</option>
                   </select>
                 </div>
                 {period && (
@@ -195,7 +193,7 @@ export default function Collections(props) {
                           }
                           delete={deleteCollection}
                           collections={props?.collections}
-                          dates={uniqueMonthYear(props?.collections)}
+                          dates={uniqueMonthYear}
                           update={updateCollection}
                         />
                       </div>
