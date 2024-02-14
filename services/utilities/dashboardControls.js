@@ -1,7 +1,7 @@
 const dashboardControl = {
   categories: [
     { name: "January", id: "01" },
-    { name: "February", id: "o2" },
+    { name: "February", id: "02" },
     { name: "March", id: "03" },
     { name: "April", id: "04" },
     { name: "May", id: "05" },
@@ -33,7 +33,7 @@ const dashboardControl = {
     }
     [
       { name: "January", id: "01" },
-      { name: "February", id: "o2" },
+      { name: "February", id: "02" },
       { name: "March", id: "03" },
       { name: "April", id: "04" },
       { name: "May", id: "05" },
@@ -78,7 +78,7 @@ const dashboardControl = {
     }
     [
       { name: "January", id: "01" },
-      { name: "February", id: "o2" },
+      { name: "February", id: "02" },
       { name: "March", id: "03" },
       { name: "April", id: "04" },
       { name: "May", id: "05" },
