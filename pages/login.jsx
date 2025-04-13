@@ -11,6 +11,7 @@ import {
   Bounce,
 } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GetBaseURL } from "../services/utilities/getBaseURL";
 const useUser = new UseUserStore();
 export default function LoginPage() {
   const [userData, setUserData] = useState({
@@ -24,7 +25,7 @@ export default function LoginPage() {
     });
   };
 
-  const checkValidUser = (user, formData) => {
+  const checkValidUser = async (user, formData) => {
     if (user?.data?.length > 0) {
       let res = user?.data?.filter(
         (us) =>
@@ -33,9 +34,8 @@ export default function LoginPage() {
       );
 
       if (res?.length == 1) {
-        console.log(res);
         Cookies.set("STUD", JSON.stringify({ user: res[0] }));
-        toast.success(`Login successfully.`, {
+        toast.success(`Success.`, {
           position: "top-right",
           transition: Flip,
           autoClose: 2000,
@@ -46,6 +46,10 @@ export default function LoginPage() {
           progress: undefined,
           theme: "light",
         });
+        const { URL, TOKEN } = await GetBaseURL();
+        Cookies.set("url", JSON.stringify({ url: URL }));
+        Cookies.set("token", JSON.stringify({ token: TOKEN }));
+
         return Router.push(`/${res[0]?.role}`);
       } else {
         toast.error("Invalid user details", {
@@ -95,23 +99,28 @@ export default function LoginPage() {
         theme: "light",
       });
     } else {
-      useUser.login(userData).then((response) => {
-        if (response.status === 200) {
-          checkValidUser(response, userData);
-        } else {
-          toast.error("Error occurred", {
-            position: "top-right",
-            transition: Flip,
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        }
-      });
+      useUser
+        .login(userData)
+        .then((response) => {
+          if (response.status === 200) {
+            checkValidUser(response, userData);
+          } else {
+            toast.error("Error occurred", {
+              position: "top-right",
+              transition: Flip,
+              autoClose: 2000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+        })
+        .catch((e) => {
+          // console.log(e);
+        });
     }
   };
 

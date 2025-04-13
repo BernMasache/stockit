@@ -1,15 +1,21 @@
 import HttpRequest from "../utilities/httpRequest";
-const URL = process.env.NEXT_PUBLIC_URL;
-const TOKEN = process.env.NEXT_PUBLIC_TOKEN;
+// const URL = process.env.NEXT_PUBLIC_URL;
+// const TOKEN = process.env.NEXT_PUBLIC_TOKEN;
 const httpRequest = new HttpRequest();
+import cookie from "js-cookie";
+
+const URL = cookie.get("url") && JSON.parse(cookie.get("url"))?.url;
+const TOKEN = cookie.get("token") && JSON.parse(cookie.get("token"))?.token;
+
 const headers = {
   Accept: "application/json",
   "Content-Type": "application/json",
   Authorization: `Bearer ${TOKEN}`,
 };
 
-export default class UseCollectionService {
-  getCollectionsConfigurations = async () => {
+const UseCollectionService = {
+  apiURL: cookie.get("url") && JSON.parse(cookie.get("url")).url,
+  getCollectionsConfigurations: async () => {
     const configurations = await httpRequest.get(
       URL + "?sheet=configurations",
       {
@@ -17,16 +23,16 @@ export default class UseCollectionService {
       }
     );
     return configurations;
-  };
+  },
 
-  getCollections = async () => {
+  getCollections: async () => {
     const collections = await httpRequest.get(URL + "?sheet=collections", {
       headers,
     });
     return collections;
-  };
+  },
 
-  createCollection = async (body) => {
+  createCollection: async (body) => {
     body.id = "INCREMENT";
     body.createdAt = "DATETIME";
     body.lastUpdated = "DATETIME";
@@ -41,9 +47,9 @@ export default class UseCollectionService {
       }
     );
     return result;
-  };
+  },
 
-  createDailyCollection = async (body) => {
+  createDailyCollection: async (body) => {
     let dataStore = [];
     for (let index = 0; index < body.length; index++) {
       const element = body[index];
@@ -53,7 +59,7 @@ export default class UseCollectionService {
       dataStore.push(element);
     }
     const result = await httpRequest.create(
-      URL + "?sheet=shop",
+      URL,
       JSON.stringify({
         data: dataStore,
       }),
@@ -62,14 +68,14 @@ export default class UseCollectionService {
       }
     );
     return result;
-  };
-  getDailyCollections = async () => {
+  },
+  getDailyCollections: async () => {
     const collections = await httpRequest.get(URL + "?sheet=shop", {
       headers,
     });
     return collections;
-  };
-  updateCollection = async (body) => {
+  },
+  updateCollection: async (body) => {
     body.lastUpdated = "DATETIME";
 
     const result = await httpRequest.update(
@@ -84,18 +90,19 @@ export default class UseCollectionService {
       }
     );
     return result;
-  };
+  },
 
-  deleteCollection = async (id) => {
+  deleteCollection: async (id) => {
     const result = await httpRequest.delete(URL, id + "?sheet=collections", {
       headers,
     });
     return result;
-  };
-  deleteDailyCollection = async (id) => {
+  },
+  deleteDailyCollection: async (id) => {
     const result = await httpRequest.delete(URL, id + "?sheet=shop", {
       headers,
     });
     return result;
-  };
-}
+  },
+};
+export default UseCollectionService;

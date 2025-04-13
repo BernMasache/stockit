@@ -1,0 +1,15 @@
+FROM node:18-alpine
+
+WORKDIR /stockit
+
+COPY . .
+RUN npm install --production
+
+EXPOSE 8776
+
+ARG NEXT_PUBLIC_URL
+ARG NEXT_PUBLIC_TOKEN
+ENV NEXT_PUBLIC_URL=${NEXT_PUBLIC_URL}
+ENV NEXT_PUBLIC_TOKEN=${NEXT_PUBLIC_TOKEN}
+
+CMD ["sh","-c", "npm start -- -p ${PORT:-8776}"]
